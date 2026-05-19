@@ -33,7 +33,7 @@ export function Header() {
             </Link>
           ))}
           <Link
-            to="/contacto"
+            to="/agendarsesion"
             className="text-sm rounded-full bg-primary text-primary-foreground px-5 py-2.5 hover:opacity-90 transition"
           >
             Agendar sesión
