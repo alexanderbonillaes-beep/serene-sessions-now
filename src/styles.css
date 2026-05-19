@@ -115,4 +115,13 @@
                 radial-gradient(ellipse at bottom right, oklch(0.88 0.04 175 / 0.5), transparent 60%),
                 oklch(0.985 0.012 90);
   }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  .animate-marquee {
+    animation: marquee linear infinite;
+    width: max-content;
+  }
+  .animate-marquee:hover { animation-play-state: paused; }
 }
