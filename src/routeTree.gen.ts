@@ -9,8 +9,44 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SobreMiRouteImport } from './routes/sobre-mi'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as ServiciosRouteImport } from './routes/servicios'
+import { Route as EnfoqueRouteImport } from './routes/enfoque'
+import { Route as ContactoRouteImport } from './routes/contacto'
+import { Route as BlogRouteImport } from './routes/blog'
 import { Route as IndexRouteImport } from './routes/index'
 
+const SobreMiRoute = SobreMiRouteImport.update({
+  id: '/sobre-mi',
+  path: '/sobre-mi',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServiciosRoute = ServiciosRouteImport.update({
+  id: '/servicios',
+  path: '/servicios',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EnfoqueRoute = EnfoqueRouteImport.update({
+  id: '/enfoque',
+  path: '/enfoque',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactoRoute = ContactoRouteImport.update({
+  id: '/contacto',
+  path: '/contacto',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogRoute = BlogRouteImport.update({
+  id: '/blog',
+  path: '/blog',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -19,28 +55,116 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/blog': typeof BlogRoute
+  '/contacto': typeof ContactoRoute
+  '/enfoque': typeof EnfoqueRoute
+  '/servicios': typeof ServiciosRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/sobre-mi': typeof SobreMiRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/blog': typeof BlogRoute
+  '/contacto': typeof ContactoRoute
+  '/enfoque': typeof EnfoqueRoute
+  '/servicios': typeof ServiciosRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/sobre-mi': typeof SobreMiRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/blog': typeof BlogRoute
+  '/contacto': typeof ContactoRoute
+  '/enfoque': typeof EnfoqueRoute
+  '/servicios': typeof ServiciosRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/sobre-mi': typeof SobreMiRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/blog'
+    | '/contacto'
+    | '/enfoque'
+    | '/servicios'
+    | '/sitemap.xml'
+    | '/sobre-mi'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/blog'
+    | '/contacto'
+    | '/enfoque'
+    | '/servicios'
+    | '/sitemap.xml'
+    | '/sobre-mi'
+  id:
+    | '__root__'
+    | '/'
+    | '/blog'
+    | '/contacto'
+    | '/enfoque'
+    | '/servicios'
+    | '/sitemap.xml'
+    | '/sobre-mi'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BlogRoute: typeof BlogRoute
+  ContactoRoute: typeof ContactoRoute
+  EnfoqueRoute: typeof EnfoqueRoute
+  ServiciosRoute: typeof ServiciosRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  SobreMiRoute: typeof SobreMiRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/sobre-mi': {
+      id: '/sobre-mi'
+      path: '/sobre-mi'
+      fullPath: '/sobre-mi'
+      preLoaderRoute: typeof SobreMiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/servicios': {
+      id: '/servicios'
+      path: '/servicios'
+      fullPath: '/servicios'
+      preLoaderRoute: typeof ServiciosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/enfoque': {
+      id: '/enfoque'
+      path: '/enfoque'
+      fullPath: '/enfoque'
+      preLoaderRoute: typeof EnfoqueRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contacto': {
+      id: '/contacto'
+      path: '/contacto'
+      fullPath: '/contacto'
+      preLoaderRoute: typeof ContactoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog': {
+      id: '/blog'
+      path: '/blog'
+      fullPath: '/blog'
+      preLoaderRoute: typeof BlogRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -53,17 +177,13 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BlogRoute: BlogRoute,
+  ContactoRoute: ContactoRoute,
+  EnfoqueRoute: EnfoqueRoute,
+  ServiciosRoute: ServiciosRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
+  SobreMiRoute: SobreMiRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
