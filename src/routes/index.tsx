@@ -10,7 +10,7 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "Alexander Bonilla — Psicólogo Clínico | Terapia humana y cercana" },
-      { name: "description", content: "Psicólogo clínico en Temuco. Terapia presencial para ansiedad, autoestima, regulación emocional, neurodivergencias y más. Un espacio seguro y libre de juicios." },
+      { name: "description", content: "Psicólogo clínico en La Serena. Terapia presencial para ansiedad, autoestima, regulación emocional, neurodivergencias y más. Un espacio seguro y libre de juicios." },
       { property: "og:title", content: "Alexander Bonilla — Psicólogo Clínico" },
       { property: "og:description", content: "Un espacio seguro y humano para tu bienestar emocional." },
     ],
@@ -42,7 +42,7 @@ function Index() {
               Un espacio seguro para <em className="text-primary not-italic font-medium">sentir, pensar y crecer.</em>
             </h1>
             <p className="mt-6 text-lg text-muted-foreground max-w-lg leading-relaxed">
-              Acompañamiento psicológico cercano y libre de juicios para niños, adolescentes y adultos jóvenes. Atención presencial en Temuco.
+              Acompañamiento psicológico cercano y libre de juicios para niños, adolescentes y adultos jóvenes. Atención presencial en La Serena.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
@@ -255,7 +255,7 @@ function Index() {
 
           <div className="rounded-3xl overflow-hidden border border-border/60 shadow-xl">
             <iframe
-              title="Ubicación consulta — Av. Balmaceda 2195, Temuco"
+              title="Ubicación consulta — Av. Balmaceda 2195, La Serena"
               src={MAP_EMBED_URL}
               width="100%"
               height="480"
