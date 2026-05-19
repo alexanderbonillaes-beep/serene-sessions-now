@@ -5,6 +5,7 @@ import wavesImg from "@/assets/waves.jpg";
 import careImg from "@/assets/care.jpg";
 import { services } from "@/lib/services";
 import { EMAIL, INSTAGRAM_URL, INSTAGRAM_HANDLE, ADDRESS, MAP_EMBED_URL, MAP_LINK } from "@/lib/contact";
+import { ReviewsSection } from "@/components/site/ReviewsSection";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -177,6 +178,9 @@ function Index() {
           className="rounded-[2.5rem] aspect-square object-cover shadow-xl"
         />
       </section>
+
+      {/* RESEÑAS */}
+      <ReviewsSection />
 
       {/* BLOG */}
       <section id="blog" className="scroll-mt-24 bg-gradient-soft py-24">

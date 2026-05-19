@@ -7,6 +7,7 @@ const sections = [
   { hash: "#sobre-mi", label: "Sobre mí" },
   { hash: "#servicios", label: "Servicios" },
   { hash: "#enfoque", label: "Enfoque" },
+  { hash: "#resenas", label: "Reseñas" },
   { hash: "#blog", label: "Blog" },
   { hash: "#contacto", label: "Contacto" },
 ] as const;
