@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef } from "react";
 import { CreditCard } from "lucide-react";
+import { PAYMENT_URL } from "@/lib/contact";
 
 export const Route = createFileRoute("/agendarsesion")({
   head: () => ({
@@ -8,7 +9,7 @@ export const Route = createFileRoute("/agendarsesion")({
       { title: "Agendar sesión — Reserva tu cita | Alexander Bonilla" },
       { name: "description", content: "Reserva tu sesión de terapia con Alexander Bonilla de forma rápida y sencilla a través de Calendly." },
       { property: "og:title", content: "Agendar sesión — Alexander Bonilla" },
-      { property: "og:description", content: "Reserva tu sesión de terapia online o presencial." },
+      { property: "og:description", content: "Reserva tu sesión de terapia presencial." },
     ],
     links: [{ rel: "canonical", href: "/agendarsesion" }],
   }),
@@ -20,7 +21,6 @@ function AgendarSesion() {
 
   useEffect(() => {
     if (!widgetRef.current) return;
-    // Load Calendly widget script dynamically on client side
     const existing = document.getElementById("calendly-widget-script");
     if (!existing) {
       const script = document.createElement("script");
@@ -56,18 +56,16 @@ function AgendarSesion() {
         <div className="rounded-3xl bg-card border border-border/60 p-8 md:p-10">
           <h2 className="font-display text-2xl mb-3">¿Ya agendaste?</h2>
           <p className="text-muted-foreground mb-6 max-w-md mx-auto">
-            Puedes realizar el pago de tu sesión de forma segura. Te enviaré la confirmación una vez procesado.
+            Realiza el pago de tu sesión de forma segura a través de Flow. Te enviaré la confirmación una vez procesado.
           </p>
-          <button
-            type="button"
+          <a
+            href={PAYMENT_URL}
+            target="_blank"
+            rel="noreferrer"
             className="inline-flex items-center gap-2 rounded-full bg-primary text-primary-foreground px-7 py-3.5 text-sm hover:opacity-90 transition"
-            onClick={() => {
-              // Payment functionality can be wired here once a provider is chosen
-              alert("Próximamente: integración de pagos. Por ahora, coordina el pago directamente vía WhatsApp o email.");
-            }}
           >
             <CreditCard className="h-4 w-4" /> Pagar sesión
-          </button>
+          </a>
         </div>
       </section>
     </>

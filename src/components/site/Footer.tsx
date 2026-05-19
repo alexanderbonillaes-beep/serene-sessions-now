@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { Instagram, MessageCircle, Mail } from "lucide-react";
 import logo from "@/assets/logo.png";
-import { WHATSAPP_URL, INSTAGRAM_URL, EMAIL } from "@/lib/contact";
+import { WHATSAPP_URL, INSTAGRAM_URL, EMAIL, ADDRESS } from "@/lib/contact";
 
 export function Footer() {
   return (
@@ -16,11 +16,12 @@ export function Footer() {
         <div>
           <h4 className="text-sm font-medium mb-4 text-foreground">Navegación</h4>
           <ul className="space-y-2 text-sm text-muted-foreground">
-            <li><Link to="/sobre-mi" className="hover:text-primary">Sobre mí</Link></li>
-            <li><Link to="/servicios" className="hover:text-primary">Servicios</Link></li>
-            <li><Link to="/enfoque" className="hover:text-primary">Enfoque</Link></li>
-            <li><Link to="/blog" className="hover:text-primary">Blog</Link></li>
-            <li><Link to="/contacto" className="hover:text-primary">Contacto</Link></li>
+            <li><a href="/#sobre-mi" className="hover:text-primary">Sobre mí</a></li>
+            <li><a href="/#servicios" className="hover:text-primary">Servicios</a></li>
+            <li><a href="/#enfoque" className="hover:text-primary">Enfoque</a></li>
+            <li><a href="/#blog" className="hover:text-primary">Blog</a></li>
+            <li><a href="/#contacto" className="hover:text-primary">Contacto</a></li>
+            <li><Link to="/agendarsesion" className="hover:text-primary">Agendar sesión</Link></li>
           </ul>
         </div>
         <div>
@@ -39,7 +40,7 @@ export function Footer() {
               <Mail className="h-4 w-4" />
             </a>
           </div>
-          <p className="text-sm text-muted-foreground">Atención online y presencial</p>
+          <p className="text-sm text-muted-foreground">{ADDRESS}</p>
         </div>
       </div>
       <div className="border-t border-border/60 py-6 text-center text-xs text-muted-foreground">
