@@ -248,7 +248,7 @@ function Index() {
               </div>
               <div>
                 <h3 className="font-display text-xl">Horarios</h3>
-                <p className="text-sm text-muted-foreground">Lun a Vie · 9:00 – 19:00</p>
+                <p className="text-sm text-muted-foreground">Lun a Vie · 17:30 – 21:30</p>
               </div>
             </div>
           </div>
