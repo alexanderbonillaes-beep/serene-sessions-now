@@ -79,6 +79,12 @@ function Index() {
         </div>
       </section>
 
+      {/* Olas decorativas — transición entre hero y sobre mí */}
+      <div aria-hidden className="-mt-px">
+        <img src={wavesDivider} alt="" className="w-full block select-none" />
+      </div>
+
+
       {/* SOBRE MÍ */}
       <section id="sobre-mi" className="scroll-mt-24 mx-auto max-w-5xl px-6 py-24 grid md:grid-cols-2 gap-12 items-start">
         <img src={careImg} alt="" loading="lazy" className="rounded-[2.5rem] aspect-[4/5] object-cover shadow-xl" />
