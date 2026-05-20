@@ -78,8 +78,6 @@ function Index() {
             />
           </div>
         </div>
-      </section>
-
       {/* SOBRE MÍ */}
       <section id="sobre-mi" className="scroll-mt-24 mx-auto max-w-5xl px-6 py-24 grid md:grid-cols-2 gap-12 items-start">
         <img src={careImg} alt="" loading="lazy" className="rounded-[2.5rem] aspect-[4/5] object-cover shadow-xl" />
@@ -87,23 +85,45 @@ function Index() {
           <p className="text-xs uppercase tracking-[0.25em] text-primary/80">Sobre mí</p>
           <h2 className="font-display text-4xl md:text-5xl text-foreground leading-tight">Hola, soy Alexander.</h2>
           <p>
-            Soy psicólogo clínico y mi vocación es acompañar procesos de cambio desde la cercanía,
-            el respeto y una mirada profundamente humana.
+            Psicólogo clínico titulado de la Universidad de La Serena (2017), con formación y
+            experiencia clínica en psicoterapia infanto-juvenil, adultez joven y familia, orientación
+            sistémica breve y abordaje integral de la salud mental.
+          </p>
+          <p>
+            Acompaño procesos terapéuticos desde el respeto, la contención emocional y el vínculo
+            humano, comprendiendo a cada consultante dentro de su contexto relacional para promover
+            cambios significativos y sostenibles.
           </p>
           <div>
-            <h3 className="font-display text-2xl mb-2 text-foreground">Mi experiencia</h3>
+            <h3 className="font-display text-2xl mb-2 text-foreground">Experiencia clínica</h3>
             <p>
-              He acompañado a niños, adolescentes y adultos jóvenes en procesos relacionados con ansiedad,
-              autoestima, regulación emocional, neurodivergencias —especialmente TEA— y desarrollo personal.
+              Desde 2017 me desempeño como psicólogo clínico infanto-juvenil en CESAM Tierras Blancas,
+              dispositivo dependiente del Hospital San Pablo de Coquimbo, atendiendo a pacientes de
+              complejidad moderada y severa en problemáticas emocionales, conductuales, familiares y
+              del neurodesarrollo.
             </p>
           </div>
           <div>
-            <h3 className="font-display text-2xl mb-2 text-foreground">Por qué hago esto</h3>
+            <h3 className="font-display text-2xl mb-2 text-foreground">Formación especializada</h3>
+            <ul className="space-y-2 text-foreground/80">
+              <li className="flex gap-3"><span className="text-primary mt-1.5 h-1.5 w-1.5 rounded-full bg-primary shrink-0" /> Diploma en Intervenciones Terapéuticas en Infancia, Adolescencia y Familia</li>
+              <li className="flex gap-3"><span className="text-primary mt-1.5 h-1.5 w-1.5 rounded-full bg-primary shrink-0" /> Postítulo en Psicoterapia Sistémica Breve</li>
+              <li className="flex gap-3"><span className="text-primary mt-1.5 h-1.5 w-1.5 rounded-full bg-primary shrink-0" /> Formación en Arteterapia</li>
+              <li className="flex gap-3"><span className="text-primary mt-1.5 h-1.5 w-1.5 rounded-full bg-primary shrink-0" /> Formación en Sexualidad Humana</li>
+            </ul>
+          </div>
+          <div>
+            <h3 className="font-display text-2xl mb-2 text-foreground">Mi mirada</h3>
             <p>
-              Porque creo que todos merecemos un lugar donde sentirnos comprendidos. Y porque he visto cómo,
-              con apoyo adecuado, las personas florecen y descubren recursos que no sabían que tenían.
+              Concibo la terapia como un proceso colaborativo, enfocado en fortalecer recursos
+              personales y favorecer el bienestar emocional, siempre desde una mirada respetuosa de
+              la historia, los ritmos y la singularidad de cada persona. He participado como expositor
+              y docente en Primeros Auxilios Psicológicos (PAP), identidades y sexualidad humana.
             </p>
           </div>
+        </div>
+      </section>
+
         </div>
       </section>
 
