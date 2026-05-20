@@ -78,6 +78,8 @@ function Index() {
             />
           </div>
         </div>
+      </section>
+
       {/* SOBRE MÍ */}
       <section id="sobre-mi" className="scroll-mt-24 mx-auto max-w-5xl px-6 py-24 grid md:grid-cols-2 gap-12 items-start">
         <img src={careImg} alt="" loading="lazy" className="rounded-[2.5rem] aspect-[4/5] object-cover shadow-xl" />
