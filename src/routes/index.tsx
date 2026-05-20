@@ -31,11 +31,9 @@ function Index() {
   return (
     <>
       {/* HERO */}
-      <section className="relative overflow-hidden bg-gradient-warm">
-        <div className="absolute inset-0 opacity-30 pointer-events-none">
-          <img src={wavesImg} alt="" className="w-full h-full object-cover" />
-        </div>
-        <div className="relative mx-auto max-w-6xl px-6 pt-16 pb-24 md:pt-24 md:pb-32 grid md:grid-cols-2 gap-12 items-center">
+      <section className="relative overflow-hidden bg-gradient-warm pb-16">
+        <div className="relative mx-auto max-w-6xl px-6 pt-16 pb-24 md:pt-24 md:pb-24 grid md:grid-cols-2 gap-12 items-center">
+
           <div>
             <span className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-primary/80 mb-6">
               <Sparkles className="h-3.5 w-3.5" /> Psicología clínica
