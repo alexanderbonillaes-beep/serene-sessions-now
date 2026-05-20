@@ -1,11 +1,12 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, CheckCircle2, Sparkles, MapPin, Mail, Instagram, Clock, Calendar } from "lucide-react";
 import heroImg from "@/assets/hero.jpg";
-import wavesImg from "@/assets/waves.jpg";
 import careImg from "@/assets/care.jpg";
+import wavesDivider from "@/assets/waves-divider.png";
 import { services } from "@/lib/services";
 import { EMAIL, INSTAGRAM_URL, INSTAGRAM_HANDLE, ADDRESS, MAP_EMBED_URL, MAP_LINK } from "@/lib/contact";
 import { ReviewsSection } from "@/components/site/ReviewsSection";
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -30,11 +31,9 @@ function Index() {
   return (
     <>
       {/* HERO */}
-      <section className="relative overflow-hidden bg-gradient-warm">
-        <div className="absolute inset-0 opacity-30 pointer-events-none">
-          <img src={wavesImg} alt="" className="w-full h-full object-cover" />
-        </div>
-        <div className="relative mx-auto max-w-6xl px-6 pt-16 pb-24 md:pt-24 md:pb-32 grid md:grid-cols-2 gap-12 items-center">
+      <section className="relative overflow-hidden bg-gradient-warm pb-16">
+        <div className="relative mx-auto max-w-6xl px-6 pt-16 pb-24 md:pt-24 md:pb-24 grid md:grid-cols-2 gap-12 items-center">
+
           <div>
             <span className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-primary/80 mb-6">
               <Sparkles className="h-3.5 w-3.5" /> Psicología clínica
@@ -79,6 +78,12 @@ function Index() {
           </div>
         </div>
       </section>
+
+      {/* Olas decorativas — transición entre hero y sobre mí */}
+      <div aria-hidden className="-mt-px">
+        <img src={wavesDivider} alt="" className="w-full block select-none" />
+      </div>
+
 
       {/* SOBRE MÍ */}
       <section id="sobre-mi" className="scroll-mt-24 mx-auto max-w-5xl px-6 py-24 grid md:grid-cols-2 gap-12 items-start">
