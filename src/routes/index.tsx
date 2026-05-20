@@ -124,9 +124,6 @@ function Index() {
         </div>
       </section>
 
-        </div>
-      </section>
-
       {/* SERVICIOS */}
       <section id="servicios" className="scroll-mt-24 bg-gradient-soft py-24">
         <div className="mx-auto max-w-6xl px-6">
