@@ -41,31 +41,38 @@
 :root {
   --radius: 1rem;
   --background: oklch(0.985 0.012 90);
-  --foreground: oklch(0.28 0.04 200);
-  --card: oklch(0.995 0.006 90);
-  --card-foreground: oklch(0.28 0.04 200);
-  --popover: oklch(0.995 0.006 90);
-  --popover-foreground: oklch(0.28 0.04 200);
-  --primary: oklch(0.52 0.06 195);
-  --primary-foreground: oklch(0.985 0.012 90);
-  --secondary: oklch(0.94 0.02 170);
-  --secondary-foreground: oklch(0.32 0.05 200);
-  --muted: oklch(0.95 0.015 90);
-  --muted-foreground: oklch(0.5 0.025 200);
-  --accent: oklch(0.78 0.11 75);
+:root {
+  --radius: 1rem;
+  /* Brand palette
+     #F9F9F7 blanco cálido — background
+     #4EA6A8 turquesa principal — primary
+     #2D6F73 turquesa oscuro — foreground / títulos
+     #DDEBEC celeste suave — secondary/muted
+     #D4A63D mostaza suave — accent  */
+  --background: oklch(0.98 0.003 95);
+  --foreground: oklch(0.30 0.04 200);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.30 0.04 200);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.30 0.04 200);
+  --primary: oklch(0.66 0.07 195);
+  --primary-foreground: oklch(0.99 0.003 95);
+  --secondary: oklch(0.93 0.018 200);
+  --secondary-foreground: oklch(0.40 0.05 200);
+  --muted: oklch(0.95 0.012 200);
+  --muted-foreground: oklch(0.50 0.03 200);
+  --accent: oklch(0.78 0.13 85);
   --accent-foreground: oklch(0.28 0.04 200);
   --destructive: oklch(0.6 0.18 25);
   --destructive-foreground: oklch(0.985 0 0);
-  --border: oklch(0.9 0.02 170);
-  --input: oklch(0.9 0.02 170);
-  --ring: oklch(0.62 0.08 195);
-  --sage: oklch(0.78 0.05 165);
-  --ochre: oklch(0.78 0.11 75);
-  --cream: oklch(0.97 0.02 85);
+  --border: oklch(0.90 0.018 200);
+  --input: oklch(0.90 0.018 200);
+  --ring: oklch(0.66 0.07 195);
+  --sage: oklch(0.78 0.05 175);
+  --ochre: oklch(0.78 0.13 85);
+  --cream: oklch(0.97 0.008 95);
 }
 
-.dark {
-  --background: oklch(0.22 0.03 200);
   --foreground: oklch(0.96 0.015 90);
   --card: oklch(0.26 0.03 200);
   --card-foreground: oklch(0.96 0.015 90);
