@@ -122,11 +122,11 @@ function AgendarSesion() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-5xl px-4 sm:px-6 py-8 md:py-12">
+      <section className="w-full px-0 sm:px-4 py-8 md:py-12">
         <div
           ref={widgetRef}
-          className="calendly-inline-widget h-[1000px] md:h-[750px]"
-          data-url="https://calendly.com/alexander-bonillaes/1hr?primary_color=4db6ac"
+          className="calendly-inline-widget w-full h-[1000px] md:h-[900px]"
+          data-url="https://calendly.com/alexander-bonillaes/1hr?primary_color=4db6ac&hide_gdpr_banner=1"
           style={{ minWidth: 280 }}
         />
       </section>
