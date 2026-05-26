@@ -42,6 +42,20 @@ export const Route = createFileRoute("/agendarsesion")({
 function AgendarSesion() {
   const widgetRef = useRef<HTMLDivElement>(null);
   const paymentRef = useRef<HTMLDivElement>(null);
+  const [copied, setCopied] = useState(false);
+
+  const handleCopyTransfer = async () => {
+    const text = Object.entries(TRANSFER_DETAILS)
+      .map(([k, v]) => `${k}: ${v}`)
+      .join("\n");
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      /* ignore */
+    }
+  };
 
   useEffect(() => {
     if (!widgetRef.current) return;
