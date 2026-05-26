@@ -198,19 +198,42 @@ function AgendarSesion() {
                 <CheckCircle2 className="h-4 w-4" /> ¡Tu cita fue agendada!
               </div>
 
-              {snapshot && (
+              {snapshot ? (
                 <div className="rounded-2xl overflow-hidden border border-border/60 bg-background mb-5">
                   <img src={snapshot} alt="Captura de tu agendamiento" className="w-full h-auto" />
+                </div>
+              ) : (
+                <div
+                  ref={fallbackRef}
+                  className="rounded-2xl border border-border/60 bg-background p-6 sm:p-8 mb-5 text-center"
+                >
+                  <div className="mx-auto h-14 w-14 rounded-full bg-primary/10 text-primary flex items-center justify-center mb-3">
+                    <CheckCircle2 className="h-8 w-8" />
+                  </div>
+                  <h3 className="font-display text-2xl text-foreground mb-1">Ha programado su cita</h3>
+                  <p className="text-sm text-muted-foreground mb-5">
+                    Se ha enviado a su correo electrónico una invitación de calendario.
+                  </p>
+                  <div className="text-left rounded-xl border border-border/60 bg-card p-5 space-y-2">
+                    <p className="font-display text-lg text-foreground">Psicoterapia Clínica</p>
+                    <p className="text-sm text-foreground/80">Alexander Bonilla Espinoza</p>
+                    <p className="text-sm text-foreground/80">
+                      Av. Balmaceda 2195, Edificio Portal Las Higueras, Piso 4, Oficina 401
+                    </p>
+                    <p className="text-xs text-muted-foreground pt-2">
+                      Revisa tu correo para ver fecha y hora exactas.
+                    </p>
+                  </div>
                 </div>
               )}
 
               <button
                 onClick={downloadPdf}
-                disabled={!snapshot}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full border border-primary/40 bg-background text-primary px-6 py-3 text-sm hover:bg-primary/5 transition disabled:opacity-50 mb-8"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full border border-primary/40 bg-background text-primary px-6 py-3 text-sm hover:bg-primary/5 transition mb-8"
               >
                 <Download className="h-4 w-4" /> Descargar agendamiento en PDF
               </button>
+
 
               <div className="border-t border-border/60 pt-6">
                 <h2 className="font-display text-2xl mb-3">¿Ya agendaste?</h2>
