@@ -356,12 +356,31 @@ function AgendarSesion() {
                 </div>
               )}
 
+              <div className="mb-6">
+                <label className="block text-sm text-foreground/80 mb-2">
+                  Fecha y hora de tu cita <span className="text-muted-foreground">(cópiala desde la confirmación de Calendly de arriba)</span>
+                </label>
+                <input
+                  type="text"
+                  value={scheduleInfo?.dateText ?? ""}
+                  onChange={(e) =>
+                    setScheduleInfo({ dateText: e.target.value, timeText: scheduleInfo?.timeText ?? "" })
+                  }
+                  placeholder="Ej: 19:30 - 20:30, miércoles 27 de mayo de 2026"
+                  className="w-full rounded-xl border border-border/60 bg-background px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground/70 focus:outline-none focus:ring-2 focus:ring-primary/40"
+                />
+                <p className="text-xs text-muted-foreground mt-2">
+                  Calendly se muestra en un marco protegido y el navegador no nos permite leer su contenido. Pega aquí la fecha y hora exactas que ves arriba para que aparezcan en tu PDF.
+                </p>
+              </div>
+
               <button
                 onClick={downloadPdf}
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full border border-primary/40 bg-background text-primary px-6 py-3 text-sm hover:bg-primary/5 transition mb-8"
               >
                 <Download className="h-4 w-4" /> Descargar agendamiento en PDF
               </button>
+
 
 
               <div className="border-t border-border/60 pt-6">
