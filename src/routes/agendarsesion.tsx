@@ -178,25 +178,25 @@ function AgendarSesion() {
     ctx.strokeStyle = "#dedbd2";
     ctx.lineWidth = 2;
     ctx.beginPath();
-    ctx.moveTo(54, 165);
-    ctx.lineTo(width - 54, 165);
+    ctx.moveTo(54, topOffset + 135);
+    ctx.lineTo(width - 54, topOffset + 135);
     ctx.stroke();
 
     ctx.fillStyle = "#2b2b2b";
     ctx.font = "700 26px Arial, sans-serif";
-    ctx.fillText("Ha programado su cita", 54, 220);
+    ctx.fillText("Ha programado su cita", 54, topOffset + 190);
 
     ctx.fillStyle = "#5f5f5f";
     ctx.font = "400 18px Arial, sans-serif";
     drawText(
       "Se ha enviado a su correo electrónico una invitación de calendario con los detalles de la sesión.",
       54,
-      255,
+      topOffset + 225,
       width - 108,
       26,
     );
 
-    const boxY = 335;
+    const boxY = topOffset + 305;
     ctx.fillStyle = "#fbfaf7";
     ctx.strokeStyle = "#dedbd2";
     ctx.lineWidth = 2;
