@@ -2,6 +2,16 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { CreditCard, CheckCircle2, Download, X } from "lucide-react";
 import { PAYMENT_URL } from "@/lib/contact";
+import logoUrl from "@/assets/logo.png";
+
+const loadImage = (src: string): Promise<HTMLImageElement> =>
+  new Promise((resolve, reject) => {
+    const img = new Image();
+    img.crossOrigin = "anonymous";
+    img.onload = () => resolve(img);
+    img.onerror = reject;
+    img.src = src;
+  });
 
 export const Route = createFileRoute("/agendarsesion")({
   head: () => ({
