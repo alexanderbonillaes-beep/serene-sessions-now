@@ -193,7 +193,7 @@ function Index() {
           </ul>
         </div>
         <img
-          src={careImg}
+          src={enfoqueImg}
           alt="Cuidado y crecimiento emocional"
           loading="lazy"
           className="rounded-[2.5rem] aspect-square object-cover shadow-xl"
