@@ -39,35 +39,35 @@
 }
 
 :root {
-  --radius: 1rem;
-  /* Brand palette
-     #F9F9F7 blanco cálido — background
-     #4EA6A8 turquesa principal — primary
-     #2D6F73 turquesa oscuro — foreground / títulos
-     #DDEBEC celeste suave — secondary/muted
-     #D4A63D mostaza suave — accent  */
-  --background: oklch(0.98 0.003 95);
-  --foreground: oklch(0.30 0.04 200);
+  --radius: 0.75rem;
+  /* Clinical brand palette
+     #FFFFFF white — background
+     #4DB6AC turquesa — primary
+     #EAF4F4 turquesa claro — secondary/muted
+     #F2C14E mostaza — accent (micro-interactions only)
+     #1F2937 slate — foreground/text */
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.27 0.03 257);
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.30 0.04 200);
+  --card-foreground: oklch(0.27 0.03 257);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.30 0.04 200);
-  --primary: oklch(0.66 0.07 195);
-  --primary-foreground: oklch(0.99 0.003 95);
-  --secondary: oklch(0.93 0.018 200);
-  --secondary-foreground: oklch(0.40 0.05 200);
-  --muted: oklch(0.95 0.012 200);
-  --muted-foreground: oklch(0.50 0.03 200);
-  --accent: oklch(0.78 0.13 85);
-  --accent-foreground: oklch(0.28 0.04 200);
+  --popover-foreground: oklch(0.27 0.03 257);
+  --primary: oklch(0.72 0.08 187);
+  --primary-foreground: oklch(1 0 0);
+  --secondary: oklch(0.96 0.012 188);
+  --secondary-foreground: oklch(0.27 0.03 257);
+  --muted: oklch(0.96 0.012 188);
+  --muted-foreground: oklch(0.45 0.02 257);
+  --accent: oklch(0.82 0.13 85);
+  --accent-foreground: oklch(0.27 0.03 257);
   --destructive: oklch(0.6 0.18 25);
-  --destructive-foreground: oklch(0.985 0 0);
-  --border: oklch(0.90 0.018 200);
-  --input: oklch(0.90 0.018 200);
-  --ring: oklch(0.66 0.07 195);
-  --sage: oklch(0.78 0.05 175);
-  --ochre: oklch(0.78 0.13 85);
-  --cream: oklch(0.97 0.008 95);
+  --destructive-foreground: oklch(1 0 0);
+  --border: oklch(0.92 0.01 188);
+  --input: oklch(0.92 0.01 188);
+  --ring: oklch(0.72 0.08 187);
+  --sage: oklch(0.96 0.012 188);
+  --ochre: oklch(0.82 0.13 85);
+  --cream: oklch(1 0 0);
 }
 
 .dark {
