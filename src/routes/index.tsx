@@ -85,7 +85,7 @@ function Index() {
       {/* SOBRE MÍ */}
       <section id="sobre-mi" className="scroll-mt-24 mx-auto max-w-5xl px-4 sm:px-6 py-16 md:py-24 grid md:grid-cols-2 gap-8 md:gap-12 items-start">
         <img src={careImg} alt="" loading="lazy" className="order-2 md:order-1 w-full rounded-[2rem] md:rounded-[2.5rem] aspect-[4/5] object-cover shadow-xl" />
-        <div className="space-y-6 text-foreground/85 leading-relaxed">
+        <div className="order-1 md:order-2 space-y-6 text-foreground/85 leading-relaxed">
           <p className="text-xs uppercase tracking-[0.25em] text-primary/80">Sobre mí</p>
           <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-foreground leading-tight">Hola, soy Alexander.</h2>
           <p>
