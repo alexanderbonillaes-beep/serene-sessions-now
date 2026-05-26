@@ -42,7 +42,8 @@ function AgendarSesion() {
       ) {
         setTimeout(() => {
           paymentRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
-        }, 400);
+        }, 5000);
+
       }
     };
     window.addEventListener("message", handler);
