@@ -103,7 +103,8 @@
     font-weight: 300;
     letter-spacing: 0.005em;
   }
-  img, video, iframe { max-width: 100%; height: auto; }
+  img, video { max-width: 100%; height: auto; }
+  iframe { max-width: 100%; }
   h1, h2, h3, h4, h5 {
     font-family: var(--font-display);
     font-weight: 500;
