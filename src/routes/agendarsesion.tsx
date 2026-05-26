@@ -11,13 +11,12 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 
-const TRANSFER_DETAILS = {
+const TRANSFER_DETAILS: Record<string, string> = {
   Nombre: "Alexander De Jesus Bonilla Espinoza",
   Rut: "18.631.788-2",
   Banco: "Banco Estado",
   "Tipo de cuenta": "Vista/Rut",
   "N° Cuenta": "18631788",
-  Email: "alexander.bonillaes@gmail.com",
 };
 
 const RECEIPT_WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
