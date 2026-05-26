@@ -18,6 +18,7 @@ export const Route = createFileRoute("/agendarsesion")({
 
 function AgendarSesion() {
   const widgetRef = useRef<HTMLDivElement>(null);
+  const fallbackRef = useRef<HTMLDivElement>(null);
   const [scheduled, setScheduled] = useState(false);
   const [snapshot, setSnapshot] = useState<string | null>(null);
   const [capturing, setCapturing] = useState(false);
@@ -47,8 +48,8 @@ function AgendarSesion() {
       const event = (e.data as { event: string }).event;
       if (event === "calendly.event_scheduled") {
         setCapturing(true);
-        // Pequeña espera para que el iframe pinte la pantalla de confirmación
-        await new Promise((r) => setTimeout(r, 600));
+        // Esperar a que Calendly pinte la pantalla "Ha programado su cita"
+        await new Promise((r) => setTimeout(r, 3500));
         try {
           if (widgetRef.current) {
             const html2canvas = (await import("html2canvas")).default;
@@ -56,27 +57,64 @@ function AgendarSesion() {
               backgroundColor: "#ffffff",
               useCORS: true,
               allowTaint: true,
-              scale: window.devicePixelRatio > 1 ? 2 : 1.5,
+              foreignObjectRendering: true,
+              scale: 2,
+              logging: false,
             });
-            setSnapshot(canvas.toDataURL("image/png"));
+            // Detectar si la captura quedó esencialmente en blanco (iframe cross-origin)
+            const ctx = canvas.getContext("2d");
+            let isBlank = false;
+            if (ctx) {
+              const sample = ctx.getImageData(
+                Math.floor(canvas.width / 2),
+                Math.floor(canvas.height / 2),
+                10,
+                10,
+              ).data;
+              let variance = 0;
+              for (let i = 0; i < sample.length; i += 4) {
+                variance += Math.abs(sample[i] - 255) + Math.abs(sample[i + 1] - 255) + Math.abs(sample[i + 2] - 255);
+              }
+              isBlank = variance < 50;
+            }
+            if (!isBlank) {
+              setSnapshot(canvas.toDataURL("image/png"));
+            } else {
+              setSnapshot(null); // se usará fallback diseñado en el modal
+            }
           }
         } catch (err) {
           console.warn("No se pudo capturar el widget", err);
+          setSnapshot(null);
         }
         setCapturing(false);
         setScheduled(true);
       }
     };
 
+
     window.addEventListener("message", handler);
     return () => window.removeEventListener("message", handler);
   }, []);
 
+  const captureFallback = async (): Promise<string | null> => {
+    if (!fallbackRef.current) return null;
+    const html2canvas = (await import("html2canvas")).default;
+    const canvas = await html2canvas(fallbackRef.current, {
+      backgroundColor: "#ffffff",
+      scale: 2,
+      logging: false,
+    });
+    return canvas.toDataURL("image/png");
+  };
+
   const downloadPdf = async () => {
-    if (!snapshot) return;
     const { jsPDF } = await import("jspdf");
+    const dataUrl = snapshot ?? (await captureFallback());
+    if (!dataUrl) return;
+
     const img = new Image();
-    img.src = snapshot;
+    img.src = dataUrl;
     await new Promise((r) => (img.onload = r));
 
     const pdf = new jsPDF({ unit: "pt", format: "a4" });
@@ -84,7 +122,6 @@ function AgendarSesion() {
     const pageH = pdf.internal.pageSize.getHeight();
     const margin = 32;
 
-    // Encabezado
     pdf.setFont("helvetica", "bold");
     pdf.setFontSize(18);
     pdf.setTextColor(40, 40, 40);
@@ -95,16 +132,16 @@ function AgendarSesion() {
     pdf.text("Alexander Bonilla — Psicólogo Clínico", margin, margin + 26);
     pdf.text(`Generado: ${new Date().toLocaleString("es-CL")}`, margin, margin + 42);
 
-    // Imagen
     const maxW = pageW - margin * 2;
     const maxH = pageH - margin * 2 - 70;
     const ratio = Math.min(maxW / img.width, maxH / img.height);
     const w = img.width * ratio;
     const h = img.height * ratio;
-    pdf.addImage(snapshot, "PNG", (pageW - w) / 2, margin + 60, w, h);
+    pdf.addImage(dataUrl, "PNG", (pageW - w) / 2, margin + 60, w, h);
 
     pdf.save(`agendamiento-${Date.now()}.pdf`);
   };
+
 
   const closeModal = () => {
     setScheduled(false);
@@ -161,19 +198,42 @@ function AgendarSesion() {
                 <CheckCircle2 className="h-4 w-4" /> ¡Tu cita fue agendada!
               </div>
 
-              {snapshot && (
+              {snapshot ? (
                 <div className="rounded-2xl overflow-hidden border border-border/60 bg-background mb-5">
                   <img src={snapshot} alt="Captura de tu agendamiento" className="w-full h-auto" />
+                </div>
+              ) : (
+                <div
+                  ref={fallbackRef}
+                  className="rounded-2xl border border-border/60 bg-background p-6 sm:p-8 mb-5 text-center"
+                >
+                  <div className="mx-auto h-14 w-14 rounded-full bg-primary/10 text-primary flex items-center justify-center mb-3">
+                    <CheckCircle2 className="h-8 w-8" />
+                  </div>
+                  <h3 className="font-display text-2xl text-foreground mb-1">Ha programado su cita</h3>
+                  <p className="text-sm text-muted-foreground mb-5">
+                    Se ha enviado a su correo electrónico una invitación de calendario.
+                  </p>
+                  <div className="text-left rounded-xl border border-border/60 bg-card p-5 space-y-2">
+                    <p className="font-display text-lg text-foreground">Psicoterapia Clínica</p>
+                    <p className="text-sm text-foreground/80">Alexander Bonilla Espinoza</p>
+                    <p className="text-sm text-foreground/80">
+                      Av. Balmaceda 2195, Edificio Portal Las Higueras, Piso 4, Oficina 401
+                    </p>
+                    <p className="text-xs text-muted-foreground pt-2">
+                      Revisa tu correo para ver fecha y hora exactas.
+                    </p>
+                  </div>
                 </div>
               )}
 
               <button
                 onClick={downloadPdf}
-                disabled={!snapshot}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full border border-primary/40 bg-background text-primary px-6 py-3 text-sm hover:bg-primary/5 transition disabled:opacity-50 mb-8"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full border border-primary/40 bg-background text-primary px-6 py-3 text-sm hover:bg-primary/5 transition mb-8"
               >
                 <Download className="h-4 w-4" /> Descargar agendamiento en PDF
               </button>
+
 
               <div className="border-t border-border/60 pt-6">
                 <h2 className="font-display text-2xl mb-3">¿Ya agendaste?</h2>
