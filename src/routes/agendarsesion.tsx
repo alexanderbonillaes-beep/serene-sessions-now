@@ -123,7 +123,8 @@ function AgendarSesion() {
 
     window.addEventListener("message", handler);
     return () => window.removeEventListener("message", handler);
-  }, []);
+  }, [extractScheduleFn]);
+
 
   const createConfirmationImage = async () => {
     const canvas = document.createElement("canvas");
