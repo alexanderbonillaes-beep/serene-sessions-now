@@ -204,11 +204,11 @@ function Index() {
       <ReviewsSection />
 
       {/* BLOG */}
-      <section id="blog" className="scroll-mt-24 bg-gradient-soft py-24">
-        <div className="mx-auto max-w-6xl px-6">
-          <div className="text-center mb-12">
+      <section id="blog" className="scroll-mt-24 bg-gradient-soft py-16 md:py-24">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6">
+          <div className="text-center mb-10 md:mb-12">
             <p className="text-xs uppercase tracking-[0.25em] text-primary/80 mb-3">Blog</p>
-            <h2 className="font-display text-4xl md:text-5xl">Espacio psicoeducativo</h2>
+            <h2 className="font-display text-3xl sm:text-4xl md:text-5xl">Espacio psicoeducativo</h2>
             <p className="mt-4 text-muted-foreground">Reflexiones y herramientas para entendernos mejor.</p>
           </div>
           <div className="grid md:grid-cols-3 gap-6">
