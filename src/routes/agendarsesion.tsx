@@ -109,11 +109,11 @@ function AgendarSesion() {
     return () => window.removeEventListener("message", handler);
   }, []);
 
-  const createConfirmationImage = () => {
+  const createConfirmationImage = async () => {
     const canvas = document.createElement("canvas");
     const scale = 2;
     const width = 760;
-    const height = 980;
+    const height = 1040;
     canvas.width = width * scale;
     canvas.height = height * scale;
     const ctx = canvas.getContext("2d");
@@ -122,6 +122,16 @@ function AgendarSesion() {
     ctx.scale(scale, scale);
     ctx.fillStyle = "#ffffff";
     ctx.fillRect(0, 0, width, height);
+
+    // Logo en la parte superior
+    try {
+      const logo = await loadImage(logoUrl);
+      const logoH = 70;
+      const logoW = (logo.width / logo.height) * logoH;
+      ctx.drawImage(logo, 54, 40, logoW, logoH);
+    } catch (e) {
+      console.warn("No se pudo cargar el logo", e);
+    }
 
     const drawText = (text: string, x: number, y: number, maxWidth: number, lineHeight: number) => {
       const words = text.split(" ");
@@ -154,14 +164,16 @@ function AgendarSesion() {
       ctx.closePath();
     };
 
+    const topOffset = 130;
+
     ctx.fillStyle = "#2b2b2b";
     ctx.font = "700 30px Arial, sans-serif";
-    ctx.fillText("Confirmación de agendamiento", 54, 70);
+    ctx.fillText("Confirmación de agendamiento", 54, topOffset + 40);
 
     ctx.fillStyle = "#666666";
     ctx.font = "400 17px Arial, sans-serif";
-    ctx.fillText("Alexander Bonilla Espinoza - Psicólogo Clínico", 54, 105);
-    ctx.fillText(`Generado: ${new Date().toLocaleString("es-CL")}`, 54, 132);
+    ctx.fillText("Alexander Bonilla Espinoza - Psicólogo Clínico", 54, topOffset + 75);
+    ctx.fillText(`Generado: ${new Date().toLocaleString("es-CL")}`, 54, topOffset + 102);
 
     ctx.strokeStyle = "#dedbd2";
     ctx.lineWidth = 2;
