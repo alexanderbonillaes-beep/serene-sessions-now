@@ -44,7 +44,7 @@ export function Header() {
         <div className="flex items-center gap-2">
           <Link
             to="/agendarsesion"
-            className="inline-flex items-center gap-2 text-sm rounded-full bg-primary text-primary-foreground px-4 md:px-5 py-2.5 hover:opacity-90 transition"
+            className="inline-flex items-center gap-2 text-sm rounded-full bg-primary text-primary-foreground px-3 sm:px-4 md:px-5 py-2 sm:py-2.5 hover:opacity-90 transition"
             onClick={() => setOpen(false)}
           >
             <Calendar className="h-4 w-4" />
