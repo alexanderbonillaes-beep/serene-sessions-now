@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, CheckCircle2, Sparkles, MapPin, Mail, Instagram, Clock, Calendar } from "lucide-react";
 import heroImg from "@/assets/hero.jpg";
 import careImg from "@/assets/care.jpg";
+import enfoqueImg from "@/assets/enfoque.jpg";
 
 import { services } from "@/lib/services";
 import { EMAIL, INSTAGRAM_URL, INSTAGRAM_HANDLE, ADDRESS, MAP_EMBED_URL, MAP_LINK } from "@/lib/contact";
@@ -192,7 +193,7 @@ function Index() {
           </ul>
         </div>
         <img
-          src={careImg}
+          src={enfoqueImg}
           alt="Cuidado y crecimiento emocional"
           loading="lazy"
           className="rounded-[2.5rem] aspect-square object-cover shadow-xl"
