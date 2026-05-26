@@ -115,20 +115,6 @@ function AgendarSesion() {
           <p className="text-muted-foreground mb-6">
             Realiza el pago de tu sesión de forma segura a través de Flow. Te enviaré la confirmación una vez procesado.
           </p>
-          <a
-            href={PAYMENT_URL}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center gap-2 rounded-full bg-primary text-primary-foreground px-7 py-3.5 text-sm hover:opacity-90 transition"
-          >
-            <CreditCard className="h-4 w-4" /> Pagar sesión
-          </a>
-
-          <div className="mt-8 pt-6 border-t border-border/60">
-            <p className="text-sm font-medium text-foreground mb-2">¿Ya pagaste?</p>
-            <p className="text-sm text-muted-foreground mb-4">
-              Envíame el comprobante de pago por WhatsApp para confirmar tu sesión.
-            </p>
           <div className="flex flex-wrap items-center justify-center gap-3">
             <a
               href={PAYMENT_URL}
