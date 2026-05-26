@@ -18,6 +18,7 @@ export const Route = createFileRoute("/agendarsesion")({
 
 function AgendarSesion() {
   const widgetRef = useRef<HTMLDivElement>(null);
+  const fallbackRef = useRef<HTMLDivElement>(null);
   const [scheduled, setScheduled] = useState(false);
   const [snapshot, setSnapshot] = useState<string | null>(null);
   const [capturing, setCapturing] = useState(false);
