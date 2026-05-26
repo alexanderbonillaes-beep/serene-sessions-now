@@ -230,7 +230,7 @@ function AgendarSesion() {
       const pdf = new jsPDF({ unit: "pt", format: "a4" });
       const pageW = pdf.internal.pageSize.getWidth();
       const pageH = pdf.internal.pageSize.getHeight();
-      const confirmationImage = createConfirmationImage();
+      const confirmationImage = await createConfirmationImage();
 
       if (!confirmationImage) {
         throw new Error("No se pudo preparar la confirmación.");
