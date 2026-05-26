@@ -113,7 +113,7 @@ function AgendarSesion() {
         <div className="mx-auto max-w-2xl text-center rounded-3xl border border-border/60 bg-card p-8 md:p-10">
           <h2 className="font-display text-2xl md:text-3xl mb-3">¿Ya agendaste?</h2>
           <p className="text-muted-foreground mb-6">
-            Realiza el pago de tu sesión de forma segura a través de Flow. Te enviaré la confirmación una vez procesado.
+            Realiza el pago de tu sesión de forma segura a través de Flow o Transferencia. Si prefieres pagar en efectivo, indícalo por WhatsApp.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-3">
             <a
