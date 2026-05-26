@@ -79,9 +79,13 @@ function Index() {
         </div>
       </section>
 
-      {/* Olas decorativas — transición entre hero y sobre mí */}
-      <div aria-hidden className="-mt-px">
-        <img src={wavesDivider} alt="" className="w-full block select-none" />
+      {/* Banner de olas — pieza visual de marca */}
+      <div aria-hidden className="-mt-px w-full overflow-hidden bg-gradient-soft">
+        <img
+          src={wavesDivider}
+          alt=""
+          className="w-full block select-none h-40 md:h-64 lg:h-80 object-cover object-center"
+        />
       </div>
 
 
