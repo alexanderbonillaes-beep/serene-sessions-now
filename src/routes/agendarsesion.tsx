@@ -1,8 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
+import { useServerFn } from "@tanstack/react-start";
 import { CreditCard, CheckCircle2, Download, X } from "lucide-react";
 import { PAYMENT_URL } from "@/lib/contact";
+import { extractSchedule } from "@/lib/schedule.functions";
 import logoUrl from "@/assets/logo.png";
+
 
 const loadImage = (src: string): Promise<HTMLImageElement> =>
   new Promise((resolve, reject) => {
