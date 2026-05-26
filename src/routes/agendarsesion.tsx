@@ -96,10 +96,20 @@ function AgendarSesion() {
               isBlank = variance < 50;
             }
             if (!isBlank) {
-              setSnapshot(canvas.toDataURL("image/png"));
+              const dataUrl = canvas.toDataURL("image/png");
+              setSnapshot(dataUrl);
+              try {
+                const info = await extractScheduleFn({ data: { imageDataUrl: dataUrl } });
+                setScheduleInfo(info);
+              } catch (e) {
+                console.warn("No se pudo extraer fecha del agendamiento", e);
+                setScheduleInfo(null);
+              }
             } else {
-              setSnapshot(null); // se usará fallback diseñado en el modal
+              setSnapshot(null);
+              setScheduleInfo(null);
             }
+
           }
         } catch (err) {
           console.warn("No se pudo capturar el widget", err);
