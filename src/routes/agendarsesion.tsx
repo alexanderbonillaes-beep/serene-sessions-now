@@ -23,6 +23,8 @@ function AgendarSesion() {
   const [snapshot, setSnapshot] = useState<string | null>(null);
   const [capturing, setCapturing] = useState(false);
 
+  const sessionLocation = "La Serena, Región de Coquimbo";
+
   useEffect(() => {
     if (!widgetRef.current) return;
     const existing = document.getElementById("calendly-widget-script");
@@ -97,110 +99,108 @@ function AgendarSesion() {
     return () => window.removeEventListener("message", handler);
   }, []);
 
+  const createConfirmationImage = () => {
+    const canvas = document.createElement("canvas");
+    const scale = 2;
+    const width = 760;
+    const height = 980;
+    canvas.width = width * scale;
+    canvas.height = height * scale;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return null;
+
+    ctx.scale(scale, scale);
+    ctx.fillStyle = "#ffffff";
+    ctx.fillRect(0, 0, width, height);
+
+    const drawText = (text: string, x: number, y: number, maxWidth: number, lineHeight: number) => {
+      const words = text.split(" ");
+      let line = "";
+      for (const word of words) {
+        const testLine = line ? `${line} ${word}` : word;
+        if (ctx.measureText(testLine).width > maxWidth && line) {
+          ctx.fillText(line, x, y);
+          line = word;
+          y += lineHeight;
+        } else {
+          line = testLine;
+        }
+      }
+      ctx.fillText(line, x, y);
+      return y;
+    };
+
+    ctx.fillStyle = "#2b2b2b";
+    ctx.font = "700 30px Arial, sans-serif";
+    ctx.fillText("Confirmación de agendamiento", 54, 70);
+
+    ctx.fillStyle = "#666666";
+    ctx.font = "400 17px Arial, sans-serif";
+    ctx.fillText("Alexander Bonilla Espinoza - Psicólogo Clínico", 54, 105);
+    ctx.fillText(`Generado: ${new Date().toLocaleString("es-CL")}`, 54, 132);
+
+    ctx.strokeStyle = "#dedbd2";
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(54, 165);
+    ctx.lineTo(width - 54, 165);
+    ctx.stroke();
+
+    ctx.fillStyle = "#2b2b2b";
+    ctx.font = "700 26px Arial, sans-serif";
+    ctx.fillText("Ha programado su cita", 54, 220);
+
+    ctx.fillStyle = "#5f5f5f";
+    ctx.font = "400 18px Arial, sans-serif";
+    drawText(
+      "Se ha enviado a su correo electrónico una invitación de calendario con los detalles de la sesión.",
+      54,
+      255,
+      width - 108,
+      26,
+    );
+
+    const boxY = 335;
+    ctx.fillStyle = "#fbfaf7";
+    ctx.strokeStyle = "#dedbd2";
+    ctx.lineWidth = 2;
+    ctx.roundRect(54, boxY, width - 108, 245, 18);
+    ctx.fill();
+    ctx.stroke();
+
+    ctx.fillStyle = "#2b2b2b";
+    ctx.font = "700 22px Arial, sans-serif";
+    ctx.fillText("Psicoterapia Clínica", 82, boxY + 52);
+
+    ctx.fillStyle = "#4a4a4a";
+    ctx.font = "400 18px Arial, sans-serif";
+    ctx.fillText("Alexander Bonilla Espinoza", 82, boxY + 88);
+    ctx.fillText(sessionLocation, 82, boxY + 122);
+
+    ctx.fillStyle = "#7a7a7a";
+    ctx.font = "400 16px Arial, sans-serif";
+    drawText("Revisa tu correo electrónico para ver fecha y hora exactas.", 82, boxY + 168, width - 164, 24);
+
+    ctx.fillStyle = "#999999";
+    ctx.font = "400 14px Arial, sans-serif";
+    ctx.fillText("Documento generado automáticamente - alexanderbonilla.cl", 54, height - 48);
+
+    return canvas.toDataURL("image/png");
+  };
+
   const downloadPdf = async () => {
     try {
       const { jsPDF } = await import("jspdf");
       const pdf = new jsPDF({ unit: "pt", format: "a4" });
       const pageW = pdf.internal.pageSize.getWidth();
       const pageH = pdf.internal.pageSize.getHeight();
-      const margin = 40;
+      const confirmationImage = createConfirmationImage();
 
-      // Encabezado
-      pdf.setFont("helvetica", "bold");
-      pdf.setFontSize(20);
-      pdf.setTextColor(40, 40, 40);
-      pdf.text("Confirmación de agendamiento", margin, margin + 6);
-
-      pdf.setFont("helvetica", "normal");
-      pdf.setFontSize(11);
-      pdf.setTextColor(110, 110, 110);
-      pdf.text("Alexander Bonilla Espinoza — Psicólogo Clínico", margin, margin + 26);
-      pdf.text(`Generado: ${new Date().toLocaleString("es-CL")}`, margin, margin + 42);
-
-      // Línea separadora
-      pdf.setDrawColor(220, 220, 220);
-      pdf.line(margin, margin + 56, pageW - margin, margin + 56);
-
-      let cursorY = margin + 80;
-
-      // Bloque de confirmación
-      pdf.setFont("helvetica", "bold");
-      pdf.setFontSize(16);
-      pdf.setTextColor(40, 40, 40);
-      pdf.text("✓ Ha programado su cita", margin, cursorY);
-      cursorY += 22;
-
-      pdf.setFont("helvetica", "normal");
-      pdf.setFontSize(11);
-      pdf.setTextColor(90, 90, 90);
-      pdf.text(
-        "Se ha enviado a su correo electrónico una invitación de calendario",
-        margin,
-        cursorY,
-      );
-      cursorY += 14;
-      pdf.text("con los detalles de la sesión.", margin, cursorY);
-      cursorY += 30;
-
-      // Caja de detalles
-      pdf.setDrawColor(220, 220, 220);
-      pdf.setFillColor(250, 249, 246);
-      pdf.roundedRect(margin, cursorY, pageW - margin * 2, 110, 8, 8, "FD");
-
-      pdf.setFont("helvetica", "bold");
-      pdf.setFontSize(13);
-      pdf.setTextColor(40, 40, 40);
-      pdf.text("Psicoterapia Clínica", margin + 16, cursorY + 24);
-
-      pdf.setFont("helvetica", "normal");
-      pdf.setFontSize(11);
-      pdf.setTextColor(70, 70, 70);
-      pdf.text("Alexander Bonilla Espinoza", margin + 16, cursorY + 44);
-      pdf.text(
-        "Av. Balmaceda 2195, Edificio Portal Las Higueras",
-        margin + 16,
-        cursorY + 62,
-      );
-      pdf.text("Piso 4, Oficina 401 — Temuco", margin + 16, cursorY + 78);
-
-      pdf.setFontSize(9);
-      pdf.setTextColor(140, 140, 140);
-      pdf.text(
-        "Revisa tu correo electrónico para ver fecha y hora exactas.",
-        margin + 16,
-        cursorY + 100,
-      );
-
-      cursorY += 140;
-
-      // Si tenemos snapshot del widget, agregarlo
-      if (snapshot) {
-        try {
-          const img = new Image();
-          img.src = snapshot;
-          await new Promise((res, rej) => {
-            img.onload = res;
-            img.onerror = rej;
-          });
-          const maxW = pageW - margin * 2;
-          const maxH = pageH - cursorY - margin;
-          const ratio = Math.min(maxW / img.width, maxH / img.height, 1);
-          const w = img.width * ratio;
-          const h = img.height * ratio;
-          pdf.addImage(snapshot, "PNG", (pageW - w) / 2, cursorY, w, h);
-        } catch (e) {
-          console.warn("No se pudo añadir la captura al PDF", e);
-        }
+      if (!confirmationImage) {
+        throw new Error("No se pudo preparar la confirmación.");
       }
 
-      // Pie
-      pdf.setFontSize(9);
-      pdf.setTextColor(160, 160, 160);
-      pdf.text(
-        "Documento generado automáticamente — alexanderbonilla.cl",
-        margin,
-        pageH - 20,
-      );
+      pdf.addImage(confirmationImage, "PNG", 0, 0, pageW, pageH);
 
       pdf.save(`agendamiento-${Date.now()}.pdf`);
     } catch (err) {
