@@ -2,6 +2,16 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { CreditCard, CheckCircle2, Download, X } from "lucide-react";
 import { PAYMENT_URL } from "@/lib/contact";
+import logoUrl from "@/assets/logo.png";
+
+const loadImage = (src: string): Promise<HTMLImageElement> =>
+  new Promise((resolve, reject) => {
+    const img = new Image();
+    img.crossOrigin = "anonymous";
+    img.onload = () => resolve(img);
+    img.onerror = reject;
+    img.src = src;
+  });
 
 export const Route = createFileRoute("/agendarsesion")({
   head: () => ({
@@ -99,11 +109,11 @@ function AgendarSesion() {
     return () => window.removeEventListener("message", handler);
   }, []);
 
-  const createConfirmationImage = () => {
+  const createConfirmationImage = async () => {
     const canvas = document.createElement("canvas");
     const scale = 2;
     const width = 760;
-    const height = 980;
+    const height = 1040;
     canvas.width = width * scale;
     canvas.height = height * scale;
     const ctx = canvas.getContext("2d");
@@ -112,6 +122,16 @@ function AgendarSesion() {
     ctx.scale(scale, scale);
     ctx.fillStyle = "#ffffff";
     ctx.fillRect(0, 0, width, height);
+
+    // Logo en la parte superior
+    try {
+      const logo = await loadImage(logoUrl);
+      const logoH = 70;
+      const logoW = (logo.width / logo.height) * logoH;
+      ctx.drawImage(logo, 54, 40, logoW, logoH);
+    } catch (e) {
+      console.warn("No se pudo cargar el logo", e);
+    }
 
     const drawText = (text: string, x: number, y: number, maxWidth: number, lineHeight: number) => {
       const words = text.split(" ");
@@ -144,37 +164,39 @@ function AgendarSesion() {
       ctx.closePath();
     };
 
+    const topOffset = 130;
+
     ctx.fillStyle = "#2b2b2b";
     ctx.font = "700 30px Arial, sans-serif";
-    ctx.fillText("Confirmación de agendamiento", 54, 70);
+    ctx.fillText("Confirmación de agendamiento", 54, topOffset + 40);
 
     ctx.fillStyle = "#666666";
     ctx.font = "400 17px Arial, sans-serif";
-    ctx.fillText("Alexander Bonilla Espinoza - Psicólogo Clínico", 54, 105);
-    ctx.fillText(`Generado: ${new Date().toLocaleString("es-CL")}`, 54, 132);
+    ctx.fillText("Alexander Bonilla Espinoza - Psicólogo Clínico", 54, topOffset + 75);
+    ctx.fillText(`Generado: ${new Date().toLocaleString("es-CL")}`, 54, topOffset + 102);
 
     ctx.strokeStyle = "#dedbd2";
     ctx.lineWidth = 2;
     ctx.beginPath();
-    ctx.moveTo(54, 165);
-    ctx.lineTo(width - 54, 165);
+    ctx.moveTo(54, topOffset + 135);
+    ctx.lineTo(width - 54, topOffset + 135);
     ctx.stroke();
 
     ctx.fillStyle = "#2b2b2b";
     ctx.font = "700 26px Arial, sans-serif";
-    ctx.fillText("Ha programado su cita", 54, 220);
+    ctx.fillText("Ha programado su cita", 54, topOffset + 190);
 
     ctx.fillStyle = "#5f5f5f";
     ctx.font = "400 18px Arial, sans-serif";
     drawText(
       "Se ha enviado a su correo electrónico una invitación de calendario con los detalles de la sesión.",
       54,
-      255,
+      topOffset + 225,
       width - 108,
       26,
     );
 
-    const boxY = 335;
+    const boxY = topOffset + 305;
     ctx.fillStyle = "#fbfaf7";
     ctx.strokeStyle = "#dedbd2";
     ctx.lineWidth = 2;
@@ -208,7 +230,7 @@ function AgendarSesion() {
       const pdf = new jsPDF({ unit: "pt", format: "a4" });
       const pageW = pdf.internal.pageSize.getWidth();
       const pageH = pdf.internal.pageSize.getHeight();
-      const confirmationImage = createConfirmationImage();
+      const confirmationImage = await createConfirmationImage();
 
       if (!confirmationImage) {
         throw new Error("No se pudo preparar la confirmación.");
