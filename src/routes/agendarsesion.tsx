@@ -129,6 +129,69 @@ function AgendarSesion() {
             <p className="text-sm text-muted-foreground mb-4">
               Envíame el comprobante de pago por WhatsApp para confirmar tu sesión.
             </p>
+          <div className="flex flex-wrap items-center justify-center gap-3">
+            <a
+              href={PAYMENT_URL}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 rounded-full bg-primary text-primary-foreground px-7 py-3.5 text-sm hover:opacity-90 transition"
+            >
+              <CreditCard className="h-4 w-4" /> Pagar sesión
+            </a>
+
+            <Dialog>
+              <DialogTrigger asChild>
+                <button
+                  type="button"
+                  className="inline-flex items-center gap-2 rounded-full border border-primary/40 bg-background text-primary px-6 py-3 text-sm hover:bg-primary/5 transition cursor-pointer"
+                >
+                  <ArrowLeftRight className="h-4 w-4" /> Transferencia
+                </button>
+              </DialogTrigger>
+              <DialogContent className="sm:max-w-md">
+                <DialogHeader>
+                  <DialogTitle>Datos para transferencia</DialogTitle>
+                  <DialogDescription>
+                    Usa estos datos para realizar la transferencia bancaria.
+                  </DialogDescription>
+                </DialogHeader>
+                <div className="mt-2 rounded-lg border border-border/60 bg-muted/30 p-4 text-left">
+                  <dl className="space-y-2 text-sm">
+                    {Object.entries(TRANSFER_DETAILS).map(([k, v]) => (
+                      <div key={k} className="flex flex-col sm:flex-row sm:justify-between sm:gap-4">
+                        <dt className="text-muted-foreground">{k}</dt>
+                        <dd className="font-medium text-foreground break-all">{v}</dd>
+                      </div>
+                    ))}
+                  </dl>
+                </div>
+                <button
+                  type="button"
+                  onClick={handleCopyTransfer}
+                  className="mt-2 inline-flex items-center justify-center gap-2 rounded-full bg-primary text-primary-foreground px-6 py-3 text-sm hover:opacity-90 transition cursor-pointer"
+                >
+                  {copied ? (
+                    <>
+                      <Check className="h-4 w-4" /> Datos copiados
+                    </>
+                  ) : (
+                    <>
+                      <Copy className="h-4 w-4" /> Copiar datos
+                    </>
+                  )}
+                </button>
+                <p className="text-xs text-muted-foreground text-center mt-1">
+                  Recuerda enviar el comprobante por WhatsApp para confirmar.
+                </p>
+              </DialogContent>
+            </Dialog>
+          </div>
+
+          <div className="mt-8 pt-6 border-t border-border/60">
+            <p className="text-sm font-medium text-foreground mb-2">¿Ya pagaste?</p>
+            <p className="text-sm text-muted-foreground mb-4">
+              Envíame el comprobante de pago por WhatsApp para confirmar tu sesión.
+            </p>
             <a
               href={RECEIPT_WHATSAPP_URL}
               target="_blank"
