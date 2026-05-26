@@ -284,9 +284,7 @@ function AgendarSesion() {
                   <div className="text-left rounded-xl border border-border/60 bg-card p-5 space-y-2">
                     <p className="font-display text-lg text-foreground">Psicoterapia Clínica</p>
                     <p className="text-sm text-foreground/80">Alexander Bonilla Espinoza</p>
-                    <p className="text-sm text-foreground/80">
-                      Av. Balmaceda 2195, Edificio Portal Las Higueras, Piso 4, Oficina 401
-                    </p>
+                    <p className="text-sm text-foreground/80">{sessionLocation}</p>
                     <p className="text-xs text-muted-foreground pt-2">
                       Revisa tu correo para ver fecha y hora exactas.
                     </p>
