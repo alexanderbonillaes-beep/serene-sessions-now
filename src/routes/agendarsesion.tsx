@@ -230,9 +230,20 @@ function AgendarSesion() {
     ctx.fillText("Alexander Bonilla Espinoza", 82, boxY + 88);
     ctx.fillText(sessionLocation, 82, boxY + 122);
 
-    ctx.fillStyle = "#7a7a7a";
-    ctx.font = "400 16px Arial, sans-serif";
-    drawText("Revisa tu correo electrónico para ver fecha y hora exactas.", 82, boxY + 168, width - 164, 24);
+    const dateLine = [scheduleInfo?.dateText, scheduleInfo?.timeText]
+      .filter((s) => s && s.trim().length > 0)
+      .join(" · ");
+
+    if (dateLine) {
+      ctx.fillStyle = "#2b2b2b";
+      ctx.font = "700 17px Arial, sans-serif";
+      drawText(dateLine, 82, boxY + 162, width - 164, 24);
+    } else {
+      ctx.fillStyle = "#7a7a7a";
+      ctx.font = "400 16px Arial, sans-serif";
+      drawText("Revisa tu correo electrónico para ver fecha y hora exactas.", 82, boxY + 168, width - 164, 24);
+    }
+
 
     ctx.fillStyle = "#999999";
     ctx.font = "400 14px Arial, sans-serif";
