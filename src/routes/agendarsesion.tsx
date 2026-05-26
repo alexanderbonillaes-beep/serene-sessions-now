@@ -1,7 +1,24 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useRef } from "react";
-import { CreditCard, MessageCircle } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { CreditCard, MessageCircle, ArrowLeftRight, Copy, Check } from "lucide-react";
 import { PAYMENT_URL, WHATSAPP_NUMBER } from "@/lib/contact";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+
+const TRANSFER_DETAILS = {
+  Nombre: "Alexander De Jesus Bonilla Espinoza",
+  Rut: "18.631.788-2",
+  Banco: "Banco Estado",
+  "Tipo de cuenta": "Vista/Rut",
+  "N° Cuenta": "18631788",
+  Email: "alexander.bonillaes@gmail.com",
+};
 
 const RECEIPT_WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
   "Hola Alexander, te envío el comprobante de pago de mi sesión para confirmar."
