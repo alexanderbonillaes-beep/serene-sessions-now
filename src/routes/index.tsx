@@ -200,9 +200,6 @@ function Index() {
         />
       </section>
 
-      {/* RESEÑAS */}
-      <ReviewsSection />
-
       {/* BLOG */}
       <section id="blog" className="scroll-mt-24 bg-gradient-soft py-16 md:py-24">
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
@@ -223,6 +220,9 @@ function Index() {
           </div>
         </div>
       </section>
+
+      {/* RESEÑAS */}
+      <ReviewsSection />
 
       {/* CONTACTO */}
       <section id="contacto" className="scroll-mt-24 mx-auto max-w-6xl px-4 sm:px-6 py-16 md:py-24">
