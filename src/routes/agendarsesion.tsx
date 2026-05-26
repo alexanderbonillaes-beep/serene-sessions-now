@@ -71,7 +71,7 @@ function AgendarSesion() {
         />
       </section>
 
-      <section className="px-4 sm:px-6 pb-16 md:pb-20">
+      <section ref={paymentRef} className="px-4 sm:px-6 pb-16 md:pb-20 scroll-mt-24">
         <div className="mx-auto max-w-2xl text-center rounded-3xl border border-border/60 bg-card p-8 md:p-10">
           <h2 className="font-display text-2xl md:text-3xl mb-3">¿Ya agendaste?</h2>
           <p className="text-muted-foreground mb-6">
