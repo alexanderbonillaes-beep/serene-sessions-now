@@ -18,6 +18,7 @@ export const Route = createFileRoute("/agendarsesion")({
 
 function AgendarSesion() {
   const widgetRef = useRef<HTMLDivElement>(null);
+  const paymentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!widgetRef.current) return;
@@ -30,6 +31,24 @@ function AgendarSesion() {
       document.body.appendChild(script);
     }
   }, []);
+
+  useEffect(() => {
+    const handler = (e: MessageEvent) => {
+      const data = e.data as { event?: string } | null;
+      if (
+        data &&
+        typeof data === "object" &&
+        data.event === "calendly.event_scheduled"
+      ) {
+        setTimeout(() => {
+          paymentRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+        }, 400);
+      }
+    };
+    window.addEventListener("message", handler);
+    return () => window.removeEventListener("message", handler);
+  }, []);
+
 
   return (
     <>
@@ -52,7 +71,7 @@ function AgendarSesion() {
         />
       </section>
 
-      <section className="px-4 sm:px-6 pb-16 md:pb-20">
+      <section ref={paymentRef} className="px-4 sm:px-6 pb-16 md:pb-20 scroll-mt-24">
         <div className="mx-auto max-w-2xl text-center rounded-3xl border border-border/60 bg-card p-8 md:p-10">
           <h2 className="font-display text-2xl md:text-3xl mb-3">¿Ya agendaste?</h2>
           <p className="text-muted-foreground mb-6">
