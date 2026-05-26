@@ -1,11 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef } from "react";
-import { CreditCard, MessageCircle } from "lucide-react";
-import { PAYMENT_URL, WHATSAPP_NUMBER } from "@/lib/contact";
+import { CreditCard } from "lucide-react";
+import { PAYMENT_URL } from "@/lib/contact";
 
-const RECEIPT_WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
-  "Hola Alexander, te envío el comprobante de pago de mi sesión para confirmar."
-)}`;
 
 
 export const Route = createFileRoute("/agendarsesion")({
