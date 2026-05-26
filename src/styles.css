@@ -46,28 +46,28 @@
      #EAF4F4 turquesa claro — secondary/muted
      #F2C14E mostaza — accent (micro-interactions only)
      #1F2937 slate — foreground/text */
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.27 0.03 257);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.27 0.03 257);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.27 0.03 257);
-  --primary: oklch(0.72 0.08 187);
-  --primary-foreground: oklch(1 0 0);
-  --secondary: oklch(0.96 0.012 188);
-  --secondary-foreground: oklch(0.27 0.03 257);
-  --muted: oklch(0.96 0.012 188);
-  --muted-foreground: oklch(0.45 0.02 257);
-  --accent: oklch(0.82 0.13 85);
-  --accent-foreground: oklch(0.27 0.03 257);
-  --destructive: oklch(0.6 0.18 25);
-  --destructive-foreground: oklch(1 0 0);
-  --border: oklch(0.92 0.01 188);
-  --input: oklch(0.92 0.01 188);
-  --ring: oklch(0.72 0.08 187);
-  --sage: oklch(0.96 0.012 188);
-  --ochre: oklch(0.82 0.13 85);
-  --cream: oklch(1 0 0);
+  --background: #FFFFFF;
+  --foreground: #1F2937;
+  --card: #FFFFFF;
+  --card-foreground: #1F2937;
+  --popover: #FFFFFF;
+  --popover-foreground: #1F2937;
+  --primary: #4DB6AC;
+  --primary-foreground: #FFFFFF;
+  --secondary: #EAF4F4;
+  --secondary-foreground: #1F2937;
+  --muted: #EAF4F4;
+  --muted-foreground: #5A6573;
+  --accent: #F2C14E;
+  --accent-foreground: #1F2937;
+  --destructive: #DC2626;
+  --destructive-foreground: #FFFFFF;
+  --border: #D9E8E8;
+  --input: #D9E8E8;
+  --ring: #4DB6AC;
+  --sage: #EAF4F4;
+  --ochre: #F2C14E;
+  --cream: #FFFFFF;
 }
 
 .dark {
