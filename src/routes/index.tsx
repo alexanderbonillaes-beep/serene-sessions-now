@@ -168,10 +168,10 @@ function Index() {
       </section>
 
       {/* ENFOQUE */}
-      <section id="enfoque" className="scroll-mt-24 mx-auto max-w-6xl px-6 py-24 grid md:grid-cols-2 gap-12 items-center">
+      <section id="enfoque" className="scroll-mt-24 mx-auto max-w-6xl px-4 sm:px-6 py-16 md:py-24 grid md:grid-cols-2 gap-8 md:gap-12 items-center">
         <div>
           <p className="text-xs uppercase tracking-[0.25em] text-primary/80 mb-4">Mi enfoque</p>
-          <h2 className="font-display text-4xl md:text-5xl leading-tight text-balance">
+          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl leading-tight text-balance">
             Cada proceso es único. Mi mirada, siempre humana.
           </h2>
           <p className="mt-6 text-muted-foreground leading-relaxed">
@@ -196,7 +196,7 @@ function Index() {
           src={enfoqueImg}
           alt="Cuidado y crecimiento emocional"
           loading="lazy"
-          className="rounded-[2.5rem] aspect-square object-cover shadow-xl"
+          className="w-full rounded-[2rem] md:rounded-[2.5rem] aspect-square object-cover shadow-xl"
         />
       </section>
 
