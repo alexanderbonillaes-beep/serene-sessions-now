@@ -1,7 +1,23 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useRef } from "react";
-import { CreditCard, MessageCircle } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { CreditCard, MessageCircle, ArrowLeftRight, Copy, Check } from "lucide-react";
 import { PAYMENT_URL, WHATSAPP_NUMBER } from "@/lib/contact";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+
+const TRANSFER_DETAILS: Record<string, string> = {
+  Nombre: "Alexander De Jesus Bonilla Espinoza",
+  Rut: "18.631.788-2",
+  Banco: "Banco Estado",
+  "Tipo de cuenta": "Vista/Rut",
+  "N° Cuenta": "18631788",
+};
 
 const RECEIPT_WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
   "Hola Alexander, te envío el comprobante de pago de mi sesión para confirmar."
@@ -26,6 +42,20 @@ export const Route = createFileRoute("/agendarsesion")({
 function AgendarSesion() {
   const widgetRef = useRef<HTMLDivElement>(null);
   const paymentRef = useRef<HTMLDivElement>(null);
+  const [copied, setCopied] = useState(false);
+
+  const handleCopyTransfer = async () => {
+    const text = Object.entries(TRANSFER_DETAILS)
+      .map(([k, v]) => `${k}: ${v}`)
+      .join("\n");
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      /* ignore */
+    }
+  };
 
   useEffect(() => {
     if (!widgetRef.current) return;
@@ -85,14 +115,63 @@ function AgendarSesion() {
           <p className="text-muted-foreground mb-6">
             Realiza el pago de tu sesión de forma segura a través de Flow. Te enviaré la confirmación una vez procesado.
           </p>
-          <a
-            href={PAYMENT_URL}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center gap-2 rounded-full bg-primary text-primary-foreground px-7 py-3.5 text-sm hover:opacity-90 transition"
-          >
-            <CreditCard className="h-4 w-4" /> Pagar sesión
-          </a>
+          <div className="flex flex-wrap items-center justify-center gap-3">
+            <a
+              href={PAYMENT_URL}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 rounded-full bg-primary text-primary-foreground px-7 py-3.5 text-sm hover:opacity-90 transition"
+            >
+              <CreditCard className="h-4 w-4" /> Pagar sesión
+            </a>
+
+            <Dialog>
+              <DialogTrigger asChild>
+                <button
+                  type="button"
+                  className="inline-flex items-center gap-2 rounded-full border border-primary/40 bg-background text-primary px-6 py-3 text-sm hover:bg-primary/5 transition cursor-pointer"
+                >
+                  <ArrowLeftRight className="h-4 w-4" /> Transferencia
+                </button>
+              </DialogTrigger>
+              <DialogContent className="sm:max-w-md">
+                <DialogHeader>
+                  <DialogTitle>Datos para transferencia</DialogTitle>
+                  <DialogDescription>
+                    Usa estos datos para realizar la transferencia bancaria.
+                  </DialogDescription>
+                </DialogHeader>
+                <div className="mt-2 rounded-lg border border-border/60 bg-muted/30 p-4 text-left">
+                  <dl className="space-y-2 text-sm">
+                    {Object.entries(TRANSFER_DETAILS).map(([k, v]) => (
+                      <div key={k} className="flex flex-col sm:flex-row sm:justify-between sm:gap-4">
+                        <dt className="text-muted-foreground">{k}</dt>
+                        <dd className="font-medium text-foreground break-all">{v}</dd>
+                      </div>
+                    ))}
+                  </dl>
+                </div>
+                <button
+                  type="button"
+                  onClick={handleCopyTransfer}
+                  className="mt-2 inline-flex items-center justify-center gap-2 rounded-full bg-primary text-primary-foreground px-6 py-3 text-sm hover:opacity-90 transition cursor-pointer"
+                >
+                  {copied ? (
+                    <>
+                      <Check className="h-4 w-4" /> Datos copiados
+                    </>
+                  ) : (
+                    <>
+                      <Copy className="h-4 w-4" /> Copiar datos
+                    </>
+                  )}
+                </button>
+                <p className="text-xs text-muted-foreground text-center mt-1">
+                  Recuerda enviar el comprobante por WhatsApp para confirmar.
+                </p>
+              </DialogContent>
+            </Dialog>
+          </div>
 
           <div className="mt-8 pt-6 border-t border-border/60">
             <p className="text-sm font-medium text-foreground mb-2">¿Ya pagaste?</p>
