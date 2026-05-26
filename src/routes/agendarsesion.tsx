@@ -35,8 +35,11 @@ function AgendarSesion() {
   const [scheduled, setScheduled] = useState(false);
   const [snapshot, setSnapshot] = useState<string | null>(null);
   const [capturing, setCapturing] = useState(false);
+  const [scheduleInfo, setScheduleInfo] = useState<{ dateText: string; timeText: string } | null>(null);
+  const extractScheduleFn = useServerFn(extractSchedule);
 
   const sessionLocation = "La Serena, Región de Coquimbo";
+
 
   useEffect(() => {
     if (!widgetRef.current) return;
