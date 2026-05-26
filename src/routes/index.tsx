@@ -225,10 +225,10 @@ function Index() {
       </section>
 
       {/* CONTACTO */}
-      <section id="contacto" className="scroll-mt-24 mx-auto max-w-6xl px-6 py-24">
-        <div className="text-center mb-12">
+      <section id="contacto" className="scroll-mt-24 mx-auto max-w-6xl px-4 sm:px-6 py-16 md:py-24">
+        <div className="text-center mb-10 md:mb-12">
           <p className="text-xs uppercase tracking-[0.25em] text-primary/80 mb-3">Contacto</p>
-          <h2 className="font-display text-4xl md:text-5xl">Conversemos</h2>
+          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl">Conversemos</h2>
           <p className="mt-4 text-muted-foreground max-w-xl mx-auto">
             El primer paso suele ser el más difícil. Estoy aquí para escucharte.
           </p>
