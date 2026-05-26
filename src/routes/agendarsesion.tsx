@@ -130,6 +130,20 @@ function AgendarSesion() {
       return y;
     };
 
+    const drawRoundedRect = (x: number, y: number, w: number, h: number, r: number) => {
+      ctx.beginPath();
+      ctx.moveTo(x + r, y);
+      ctx.lineTo(x + w - r, y);
+      ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+      ctx.lineTo(x + w, y + h - r);
+      ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+      ctx.lineTo(x + r, y + h);
+      ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+      ctx.lineTo(x, y + r);
+      ctx.quadraticCurveTo(x, y, x + r, y);
+      ctx.closePath();
+    };
+
     ctx.fillStyle = "#2b2b2b";
     ctx.font = "700 30px Arial, sans-serif";
     ctx.fillText("Confirmación de agendamiento", 54, 70);
@@ -164,7 +178,7 @@ function AgendarSesion() {
     ctx.fillStyle = "#fbfaf7";
     ctx.strokeStyle = "#dedbd2";
     ctx.lineWidth = 2;
-    ctx.roundRect(54, boxY, width - 108, 245, 18);
+    drawRoundedRect(54, boxY, width - 108, 245, 18);
     ctx.fill();
     ctx.stroke();
 
