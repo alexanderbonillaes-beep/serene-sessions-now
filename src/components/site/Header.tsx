@@ -16,9 +16,9 @@ export function Header() {
   const [open, setOpen] = useState(false);
   return (
     <header className="sticky top-0 z-40 backdrop-blur-md bg-background/75 border-b border-border/60">
-      <div className="mx-auto max-w-6xl px-6 h-20 flex items-center justify-between gap-3">
+      <div className="mx-auto max-w-6xl px-6 h-24 flex items-center justify-between gap-3">
         <Link to="/" className="flex items-center gap-2 shrink-0" onClick={() => setOpen(false)}>
-          <img src={logo} alt="Alexander Bonilla — Psicólogo Clínico" className="h-10 w-auto" />
+          <img src={logo} alt="Alexander Bonilla — Psicólogo Clínico" className="h-16 md:h-20 w-auto" />
         </Link>
 
         <nav className="hidden md:flex items-center gap-8">
