@@ -47,8 +47,8 @@ function AgendarSesion() {
       const event = (e.data as { event: string }).event;
       if (event === "calendly.event_scheduled") {
         setCapturing(true);
-        // Pequeña espera para que el iframe pinte la pantalla de confirmación
-        await new Promise((r) => setTimeout(r, 600));
+        // Esperar a que Calendly pinte la pantalla "Ha programado su cita"
+        await new Promise((r) => setTimeout(r, 3500));
         try {
           if (widgetRef.current) {
             const html2canvas = (await import("html2canvas")).default;
@@ -56,17 +56,41 @@ function AgendarSesion() {
               backgroundColor: "#ffffff",
               useCORS: true,
               allowTaint: true,
-              scale: window.devicePixelRatio > 1 ? 2 : 1.5,
+              foreignObjectRendering: true,
+              scale: 2,
+              logging: false,
             });
-            setSnapshot(canvas.toDataURL("image/png"));
+            // Detectar si la captura quedó esencialmente en blanco (iframe cross-origin)
+            const ctx = canvas.getContext("2d");
+            let isBlank = false;
+            if (ctx) {
+              const sample = ctx.getImageData(
+                Math.floor(canvas.width / 2),
+                Math.floor(canvas.height / 2),
+                10,
+                10,
+              ).data;
+              let variance = 0;
+              for (let i = 0; i < sample.length; i += 4) {
+                variance += Math.abs(sample[i] - 255) + Math.abs(sample[i + 1] - 255) + Math.abs(sample[i + 2] - 255);
+              }
+              isBlank = variance < 50;
+            }
+            if (!isBlank) {
+              setSnapshot(canvas.toDataURL("image/png"));
+            } else {
+              setSnapshot(null); // se usará fallback diseñado en el modal
+            }
           }
         } catch (err) {
           console.warn("No se pudo capturar el widget", err);
+          setSnapshot(null);
         }
         setCapturing(false);
         setScheduled(true);
       }
     };
+
 
     window.addEventListener("message", handler);
     return () => window.removeEventListener("message", handler);
