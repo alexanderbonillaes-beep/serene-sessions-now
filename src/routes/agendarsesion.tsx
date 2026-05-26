@@ -1,7 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef } from "react";
-import { CreditCard } from "lucide-react";
-import { PAYMENT_URL } from "@/lib/contact";
+import { CreditCard, MessageCircle } from "lucide-react";
+import { PAYMENT_URL, WHATSAPP_NUMBER } from "@/lib/contact";
+
+const RECEIPT_WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
+  "Hola Alexander, te envío el comprobante de pago de mi sesión para confirmar."
+)}`;
+
 
 export const Route = createFileRoute("/agendarsesion")({
   head: () => ({
@@ -86,6 +91,21 @@ function AgendarSesion() {
           >
             <CreditCard className="h-4 w-4" /> Pagar sesión
           </a>
+
+          <div className="mt-8 pt-6 border-t border-border/60">
+            <p className="text-sm font-medium text-foreground mb-2">¿Ya pagaste?</p>
+            <p className="text-sm text-muted-foreground mb-4">
+              Envíame el comprobante de pago por WhatsApp para confirmar tu sesión.
+            </p>
+            <a
+              href={RECEIPT_WHATSAPP_URL}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 rounded-full border border-primary/40 bg-background text-primary px-6 py-3 text-sm hover:bg-primary/5 transition"
+            >
+              <MessageCircle className="h-4 w-4" /> Enviar comprobante por WhatsApp
+            </a>
+          </div>
         </div>
       </section>
     </>
