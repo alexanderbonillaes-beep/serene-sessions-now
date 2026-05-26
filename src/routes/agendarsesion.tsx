@@ -1,8 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
+import { useServerFn } from "@tanstack/react-start";
 import { CreditCard, CheckCircle2, Download, X } from "lucide-react";
 import { PAYMENT_URL } from "@/lib/contact";
+import { extractSchedule } from "@/lib/schedule.functions";
 import logoUrl from "@/assets/logo.png";
+
 
 const loadImage = (src: string): Promise<HTMLImageElement> =>
   new Promise((resolve, reject) => {
@@ -32,8 +35,11 @@ function AgendarSesion() {
   const [scheduled, setScheduled] = useState(false);
   const [snapshot, setSnapshot] = useState<string | null>(null);
   const [capturing, setCapturing] = useState(false);
+  const [scheduleInfo, setScheduleInfo] = useState<{ dateText: string; timeText: string } | null>(null);
+  const extractScheduleFn = useServerFn(extractSchedule);
 
   const sessionLocation = "La Serena, Región de Coquimbo";
+
 
   useEffect(() => {
     if (!widgetRef.current) return;
@@ -90,10 +96,20 @@ function AgendarSesion() {
               isBlank = variance < 50;
             }
             if (!isBlank) {
-              setSnapshot(canvas.toDataURL("image/png"));
+              const dataUrl = canvas.toDataURL("image/png");
+              setSnapshot(dataUrl);
+              try {
+                const info = await extractScheduleFn({ data: { imageDataUrl: dataUrl } });
+                setScheduleInfo(info);
+              } catch (e) {
+                console.warn("No se pudo extraer fecha del agendamiento", e);
+                setScheduleInfo(null);
+              }
             } else {
-              setSnapshot(null); // se usará fallback diseñado en el modal
+              setSnapshot(null);
+              setScheduleInfo(null);
             }
+
           }
         } catch (err) {
           console.warn("No se pudo capturar el widget", err);
@@ -107,7 +123,8 @@ function AgendarSesion() {
 
     window.addEventListener("message", handler);
     return () => window.removeEventListener("message", handler);
-  }, []);
+  }, [extractScheduleFn]);
+
 
   const createConfirmationImage = async () => {
     const canvas = document.createElement("canvas");
@@ -213,9 +230,20 @@ function AgendarSesion() {
     ctx.fillText("Alexander Bonilla Espinoza", 82, boxY + 88);
     ctx.fillText(sessionLocation, 82, boxY + 122);
 
-    ctx.fillStyle = "#7a7a7a";
-    ctx.font = "400 16px Arial, sans-serif";
-    drawText("Revisa tu correo electrónico para ver fecha y hora exactas.", 82, boxY + 168, width - 164, 24);
+    const dateLine = [scheduleInfo?.dateText, scheduleInfo?.timeText]
+      .filter((s) => s && s.trim().length > 0)
+      .join(" · ");
+
+    if (dateLine) {
+      ctx.fillStyle = "#2b2b2b";
+      ctx.font = "700 17px Arial, sans-serif";
+      drawText(dateLine, 82, boxY + 162, width - 164, 24);
+    } else {
+      ctx.fillStyle = "#7a7a7a";
+      ctx.font = "400 16px Arial, sans-serif";
+      drawText("Revisa tu correo electrónico para ver fecha y hora exactas.", 82, boxY + 168, width - 164, 24);
+    }
+
 
     ctx.fillStyle = "#999999";
     ctx.font = "400 14px Arial, sans-serif";
