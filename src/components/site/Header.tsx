@@ -16,9 +16,9 @@ export function Header() {
   const [open, setOpen] = useState(false);
   return (
     <header className="sticky top-0 z-40 backdrop-blur-md bg-background/75 border-b border-border/60">
-      <div className="mx-auto max-w-6xl px-6 h-24 flex items-center justify-between gap-3">
-        <Link to="/" className="flex items-center gap-2 shrink-0" onClick={() => setOpen(false)}>
-          <img src={logo} alt="Alexander Bonilla — Psicólogo Clínico" className="h-16 md:h-20 w-auto" />
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 h-20 md:h-24 flex items-center justify-between gap-2">
+        <Link to="/" className="flex items-center gap-2 shrink-0 min-w-0" onClick={() => setOpen(false)}>
+          <img src={logo} alt="Alexander Bonilla — Psicólogo Clínico" className="h-12 sm:h-16 md:h-20 w-auto" />
         </Link>
 
         <nav className="hidden md:flex items-center gap-8">
@@ -44,7 +44,7 @@ export function Header() {
         <div className="flex items-center gap-2">
           <Link
             to="/agendarsesion"
-            className="inline-flex items-center gap-2 text-sm rounded-full bg-primary text-primary-foreground px-4 md:px-5 py-2.5 hover:opacity-90 transition"
+            className="inline-flex items-center gap-2 text-sm rounded-full bg-primary text-primary-foreground px-3 sm:px-4 md:px-5 py-2 sm:py-2.5 hover:opacity-90 transition"
             onClick={() => setOpen(false)}
           >
             <Calendar className="h-4 w-4" />

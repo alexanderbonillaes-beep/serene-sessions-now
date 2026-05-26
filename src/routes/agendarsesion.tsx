@@ -58,29 +58,29 @@ function AgendarSesion() {
 
   return (
     <>
-      <section className="bg-gradient-warm py-16">
-        <div className="mx-auto max-w-4xl px-6 text-center">
+      <section className="bg-gradient-warm py-12 md:py-16">
+        <div className="mx-auto max-w-4xl px-4 sm:px-6 text-center">
           <p className="text-xs uppercase tracking-[0.25em] text-primary/80 mb-4">Reservas</p>
-          <h1 className="font-display text-4xl md:text-5xl text-balance">Agenda tu sesión</h1>
-          <p className="mt-5 text-lg text-muted-foreground leading-relaxed">
+          <h1 className="font-display text-3xl sm:text-4xl md:text-5xl text-balance">Agenda tu sesión</h1>
+          <p className="mt-5 text-base md:text-lg text-muted-foreground leading-relaxed">
             Selecciona el día y horario que mejor te acomode. Te espero con calidez y profesionalismo.
           </p>
         </div>
       </section>
 
-      <section className="mx-auto max-w-5xl px-6 py-12">
+      <section className="mx-auto max-w-5xl px-4 sm:px-6 py-8 md:py-12">
         <div
           ref={widgetRef}
-          className="calendly-inline-widget"
+          className="calendly-inline-widget h-[1000px] md:h-[750px]"
           data-url="https://calendly.com/alexander-bonillaes/1hr?primary_color=4db6ac"
-          style={{ minWidth: 320, height: 700 }}
+          style={{ minWidth: 280 }}
         />
       </section>
 
-      <section className="mx-auto max-w-4xl px-6 pb-24 text-center">
+      <section className="mx-auto max-w-4xl px-4 sm:px-6 pb-16 md:pb-24 text-center">
         <div
           ref={paymentRef}
-          className={`rounded-3xl bg-card border p-8 md:p-10 transition-all duration-500 ${
+          className={`rounded-3xl bg-card border p-6 sm:p-8 md:p-10 transition-all duration-500 ${
             scheduled ? "border-primary shadow-2xl ring-4 ring-primary/20" : "border-border/60"
           }`}
         >

@@ -32,49 +32,49 @@ function Index() {
   return (
     <>
       {/* HERO */}
-      <section className="relative overflow-hidden bg-gradient-warm pb-16">
-        <div className="relative mx-auto max-w-6xl px-6 pt-16 pb-24 md:pt-24 md:pb-24 grid md:grid-cols-2 gap-12 items-center">
+      <section className="relative overflow-hidden bg-gradient-warm pb-12 md:pb-16">
+        <div className="relative mx-auto max-w-6xl px-4 sm:px-6 pt-10 pb-16 md:pt-24 md:pb-24 grid md:grid-cols-2 gap-8 md:gap-12 items-center">
 
           <div>
-            <span className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-primary/80 mb-6">
+            <span className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-primary/80 mb-5 md:mb-6">
               <Sparkles className="h-3.5 w-3.5" /> Psicología clínica
             </span>
-            <h1 className="font-display text-5xl md:text-6xl lg:text-7xl leading-[1.05] text-foreground text-balance">
+            <h1 className="font-display text-[2.25rem] sm:text-5xl md:text-6xl lg:text-7xl leading-[1.1] text-foreground text-balance break-words">
               Un espacio seguro para <em className="text-primary not-italic font-medium">sentir, pensar y crecer.</em>
             </h1>
-            <p className="mt-6 text-lg text-muted-foreground max-w-lg leading-relaxed">
+            <p className="mt-5 md:mt-6 text-base md:text-lg text-muted-foreground max-w-lg leading-relaxed">
               Acompañamiento psicológico cercano y libre de juicios para niños, adolescentes y adultos jóvenes. Atención presencial en La Serena.
             </p>
-            <div className="mt-8 flex flex-wrap gap-3">
+            <div className="mt-7 md:mt-8 flex flex-wrap gap-3">
               <Link
                 to="/agendarsesion"
-                className="inline-flex items-center gap-2 rounded-full bg-primary text-primary-foreground px-6 py-3.5 text-sm hover:opacity-90 transition"
+                className="inline-flex items-center gap-2 rounded-full bg-primary text-primary-foreground px-5 sm:px-6 py-3 sm:py-3.5 text-sm hover:opacity-90 transition"
               >
                 <Calendar className="h-4 w-4" /> Agendar sesión
               </Link>
               <a
                 href="#servicios"
-                className="inline-flex items-center gap-2 rounded-full border border-border bg-background/60 backdrop-blur px-6 py-3.5 text-sm hover:border-primary transition"
+                className="inline-flex items-center gap-2 rounded-full border border-border bg-background/60 backdrop-blur px-5 sm:px-6 py-3 sm:py-3.5 text-sm hover:border-primary transition"
               >
                 Ver servicios <ArrowRight className="h-4 w-4" />
               </a>
             </div>
-            <div className="mt-10 flex flex-wrap gap-6 text-xs text-muted-foreground">
+            <div className="mt-8 md:mt-10 flex flex-wrap gap-4 md:gap-6 text-xs text-muted-foreground">
               {["Consulta presencial", "Enfoque basado en evidencia", "Mirada humana y cálida"].map((t) => (
                 <div key={t} className="flex items-center gap-2">
-                  <CheckCircle2 className="h-4 w-4 text-primary" /> {t}
+                  <CheckCircle2 className="h-4 w-4 text-primary shrink-0" /> {t}
                 </div>
               ))}
             </div>
           </div>
           <div className="relative">
-            <div className="absolute -inset-6 bg-accent/20 rounded-[3rem] blur-2xl" />
+            <div className="absolute -inset-4 md:-inset-6 bg-accent/20 rounded-[3rem] blur-2xl" />
             <img
               src={heroImg}
               alt="Espacio de terapia cálido y luminoso"
               width={1536}
               height={1280}
-              className="relative rounded-[2.5rem] shadow-2xl object-cover aspect-[4/5]"
+              className="relative w-full rounded-[2rem] md:rounded-[2.5rem] shadow-2xl object-cover aspect-[4/5]"
             />
           </div>
         </div>
@@ -83,11 +83,11 @@ function Index() {
 
 
       {/* SOBRE MÍ */}
-      <section id="sobre-mi" className="scroll-mt-24 mx-auto max-w-5xl px-6 py-24 grid md:grid-cols-2 gap-12 items-start">
-        <img src={careImg} alt="" loading="lazy" className="rounded-[2.5rem] aspect-[4/5] object-cover shadow-xl" />
+      <section id="sobre-mi" className="scroll-mt-24 mx-auto max-w-5xl px-4 sm:px-6 py-16 md:py-24 grid md:grid-cols-2 gap-8 md:gap-12 items-start">
+        <img src={careImg} alt="" loading="lazy" className="w-full rounded-[2rem] md:rounded-[2.5rem] aspect-[4/5] object-cover shadow-xl" />
         <div className="space-y-6 text-foreground/85 leading-relaxed">
           <p className="text-xs uppercase tracking-[0.25em] text-primary/80">Sobre mí</p>
-          <h2 className="font-display text-4xl md:text-5xl text-foreground leading-tight">Hola, soy Alexander.</h2>
+          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-foreground leading-tight">Hola, soy Alexander.</h2>
           <p>
             Psicólogo clínico titulado de la Universidad de La Serena (2017), con formación y
             experiencia clínica en psicoterapia infanto-juvenil, adultez joven y familia, orientación
@@ -129,11 +129,11 @@ function Index() {
       </section>
 
       {/* SERVICIOS */}
-      <section id="servicios" className="scroll-mt-24 bg-gradient-soft py-24">
-        <div className="mx-auto max-w-6xl px-6">
-          <div className="text-center mb-14">
+      <section id="servicios" className="scroll-mt-24 bg-gradient-soft py-16 md:py-24">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6">
+          <div className="text-center mb-10 md:mb-14">
             <p className="text-xs uppercase tracking-[0.25em] text-primary/80 mb-3">Servicios</p>
-            <h2 className="font-display text-4xl md:text-5xl">Áreas en las que acompaño</h2>
+            <h2 className="font-display text-3xl sm:text-4xl md:text-5xl">Áreas en las que acompaño</h2>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {services.map((s) => {
@@ -168,10 +168,10 @@ function Index() {
       </section>
 
       {/* ENFOQUE */}
-      <section id="enfoque" className="scroll-mt-24 mx-auto max-w-6xl px-6 py-24 grid md:grid-cols-2 gap-12 items-center">
+      <section id="enfoque" className="scroll-mt-24 mx-auto max-w-6xl px-4 sm:px-6 py-16 md:py-24 grid md:grid-cols-2 gap-8 md:gap-12 items-center">
         <div>
           <p className="text-xs uppercase tracking-[0.25em] text-primary/80 mb-4">Mi enfoque</p>
-          <h2 className="font-display text-4xl md:text-5xl leading-tight text-balance">
+          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl leading-tight text-balance">
             Cada proceso es único. Mi mirada, siempre humana.
           </h2>
           <p className="mt-6 text-muted-foreground leading-relaxed">
@@ -196,7 +196,7 @@ function Index() {
           src={enfoqueImg}
           alt="Cuidado y crecimiento emocional"
           loading="lazy"
-          className="rounded-[2.5rem] aspect-square object-cover shadow-xl"
+          className="w-full rounded-[2rem] md:rounded-[2.5rem] aspect-square object-cover shadow-xl"
         />
       </section>
 
@@ -204,11 +204,11 @@ function Index() {
       <ReviewsSection />
 
       {/* BLOG */}
-      <section id="blog" className="scroll-mt-24 bg-gradient-soft py-24">
-        <div className="mx-auto max-w-6xl px-6">
-          <div className="text-center mb-12">
+      <section id="blog" className="scroll-mt-24 bg-gradient-soft py-16 md:py-24">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6">
+          <div className="text-center mb-10 md:mb-12">
             <p className="text-xs uppercase tracking-[0.25em] text-primary/80 mb-3">Blog</p>
-            <h2 className="font-display text-4xl md:text-5xl">Espacio psicoeducativo</h2>
+            <h2 className="font-display text-3xl sm:text-4xl md:text-5xl">Espacio psicoeducativo</h2>
             <p className="mt-4 text-muted-foreground">Reflexiones y herramientas para entendernos mejor.</p>
           </div>
           <div className="grid md:grid-cols-3 gap-6">
@@ -225,10 +225,10 @@ function Index() {
       </section>
 
       {/* CONTACTO */}
-      <section id="contacto" className="scroll-mt-24 mx-auto max-w-6xl px-6 py-24">
-        <div className="text-center mb-12">
+      <section id="contacto" className="scroll-mt-24 mx-auto max-w-6xl px-4 sm:px-6 py-16 md:py-24">
+        <div className="text-center mb-10 md:mb-12">
           <p className="text-xs uppercase tracking-[0.25em] text-primary/80 mb-3">Contacto</p>
-          <h2 className="font-display text-4xl md:text-5xl">Conversemos</h2>
+          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl">Conversemos</h2>
           <p className="mt-4 text-muted-foreground max-w-xl mx-auto">
             El primer paso suele ser el más difícil. Estoy aquí para escucharte.
           </p>
