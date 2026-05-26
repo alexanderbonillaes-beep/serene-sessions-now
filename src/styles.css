@@ -114,12 +114,10 @@
   .font-body { font-family: var(--font-body); }
   .text-balance { text-wrap: balance; }
   .bg-gradient-soft {
-    background: linear-gradient(135deg, oklch(0.97 0.008 95) 0%, oklch(0.93 0.018 200) 100%);
+    background: linear-gradient(135deg, #FFFFFF 0%, #EAF4F4 100%);
   }
   .bg-gradient-warm {
-    background: radial-gradient(ellipse at top left, oklch(0.86 0.10 85 / 0.35), transparent 60%),
-                radial-gradient(ellipse at bottom right, oklch(0.78 0.06 195 / 0.45), transparent 60%),
-                oklch(0.98 0.003 95);
+    background: linear-gradient(180deg, #FFFFFF 0%, #EAF4F4 100%);
   }
   @keyframes marquee {
     from { transform: translateX(0); }
