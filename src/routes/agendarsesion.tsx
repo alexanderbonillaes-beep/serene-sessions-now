@@ -18,6 +18,7 @@ export const Route = createFileRoute("/agendarsesion")({
 
 function AgendarSesion() {
   const widgetRef = useRef<HTMLDivElement>(null);
+  const paymentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!widgetRef.current) return;
@@ -30,6 +31,24 @@ function AgendarSesion() {
       document.body.appendChild(script);
     }
   }, []);
+
+  useEffect(() => {
+    const handler = (e: MessageEvent) => {
+      const data = e.data as { event?: string } | null;
+      if (
+        data &&
+        typeof data === "object" &&
+        data.event === "calendly.event_scheduled"
+      ) {
+        setTimeout(() => {
+          paymentRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+        }, 400);
+      }
+    };
+    window.addEventListener("message", handler);
+    return () => window.removeEventListener("message", handler);
+  }, []);
+
 
   return (
     <>
