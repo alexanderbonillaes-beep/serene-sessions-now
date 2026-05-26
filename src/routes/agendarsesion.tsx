@@ -97,11 +97,24 @@ function AgendarSesion() {
     return () => window.removeEventListener("message", handler);
   }, []);
 
+  const captureFallback = async (): Promise<string | null> => {
+    if (!fallbackRef.current) return null;
+    const html2canvas = (await import("html2canvas")).default;
+    const canvas = await html2canvas(fallbackRef.current, {
+      backgroundColor: "#ffffff",
+      scale: 2,
+      logging: false,
+    });
+    return canvas.toDataURL("image/png");
+  };
+
   const downloadPdf = async () => {
-    if (!snapshot) return;
     const { jsPDF } = await import("jspdf");
+    const dataUrl = snapshot ?? (await captureFallback());
+    if (!dataUrl) return;
+
     const img = new Image();
-    img.src = snapshot;
+    img.src = dataUrl;
     await new Promise((r) => (img.onload = r));
 
     const pdf = new jsPDF({ unit: "pt", format: "a4" });
@@ -109,7 +122,6 @@ function AgendarSesion() {
     const pageH = pdf.internal.pageSize.getHeight();
     const margin = 32;
 
-    // Encabezado
     pdf.setFont("helvetica", "bold");
     pdf.setFontSize(18);
     pdf.setTextColor(40, 40, 40);
@@ -120,16 +132,16 @@ function AgendarSesion() {
     pdf.text("Alexander Bonilla — Psicólogo Clínico", margin, margin + 26);
     pdf.text(`Generado: ${new Date().toLocaleString("es-CL")}`, margin, margin + 42);
 
-    // Imagen
     const maxW = pageW - margin * 2;
     const maxH = pageH - margin * 2 - 70;
     const ratio = Math.min(maxW / img.width, maxH / img.height);
     const w = img.width * ratio;
     const h = img.height * ratio;
-    pdf.addImage(snapshot, "PNG", (pageW - w) / 2, margin + 60, w, h);
+    pdf.addImage(dataUrl, "PNG", (pageW - w) / 2, margin + 60, w, h);
 
     pdf.save(`agendamiento-${Date.now()}.pdf`);
   };
+
 
   const closeModal = () => {
     setScheduled(false);
