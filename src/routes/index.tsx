@@ -129,11 +129,11 @@ function Index() {
       </section>
 
       {/* SERVICIOS */}
-      <section id="servicios" className="scroll-mt-24 bg-gradient-soft py-24">
-        <div className="mx-auto max-w-6xl px-6">
-          <div className="text-center mb-14">
+      <section id="servicios" className="scroll-mt-24 bg-gradient-soft py-16 md:py-24">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6">
+          <div className="text-center mb-10 md:mb-14">
             <p className="text-xs uppercase tracking-[0.25em] text-primary/80 mb-3">Servicios</p>
-            <h2 className="font-display text-4xl md:text-5xl">Áreas en las que acompaño</h2>
+            <h2 className="font-display text-3xl sm:text-4xl md:text-5xl">Áreas en las que acompaño</h2>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {services.map((s) => {
