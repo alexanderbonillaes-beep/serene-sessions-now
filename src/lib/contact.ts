@@ -4,7 +4,7 @@ export const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURICo
 )}`;
 export const INSTAGRAM_URL = "https://instagram.com/psalebonilla";
 export const INSTAGRAM_HANDLE = "@psalebonilla";
-export const EMAIL = "alexander.bonillaes@gmail.com";
+export const EMAIL = "ps.alexanderbonilla@gmail.com";
 export const PAYMENT_URL = "https://www.flow.cl/uri/r64FzWMGs";
 export const ADDRESS = "Av. Balmaceda 2195, Edificio Portal las Higueras Of 401, La Serena, Coquimbo";
 export const MAP_QUERY = encodeURIComponent("Av. Balmaceda 2195, La Serena, Coquimbo, Chile");
