@@ -120,6 +120,16 @@ function Index() {
               <li className="flex gap-3"><span className="text-primary mt-1.5 h-1.5 w-1.5 rounded-full bg-primary shrink-0" /> Diplomado en Habilidades Directivas para la Gestión en Salud</li>
             </ul>
           </div>
+          <div>
+            <h3 className="font-display text-2xl mb-2 text-foreground">Participación como relator y docente</h3>
+            <ul className="space-y-2 text-foreground/80">
+              <li className="flex gap-3"><span className="text-primary mt-1.5 h-1.5 w-1.5 rounded-full bg-primary shrink-0" /> Expositor en capacitaciones sobre Primeros Auxilios Psicológicos (PAP).</li>
+              <li className="flex gap-3"><span className="text-primary mt-1.5 h-1.5 w-1.5 rounded-full bg-primary shrink-0" /> Docente en temáticas de identidad y sexualidad humana.</li>
+              <li className="flex gap-3"><span className="text-primary mt-1.5 h-1.5 w-1.5 rounded-full bg-primary shrink-0" /> Relator en áreas relacionadas con la Salud Mental y Neurodivergencias.</li>
+              <li className="flex gap-3"><span className="text-primary mt-1.5 h-1.5 w-1.5 rounded-full bg-primary shrink-0" /> Participación en actividades formativas dirigidas a equipos, instituciones y comunidades.</li>
+            </ul>
+          </div>
+
         </div>
       </section>
 
