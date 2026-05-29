@@ -120,21 +120,9 @@ function Index() {
               <li className="flex gap-3"><span className="text-primary mt-1.5 h-1.5 w-1.5 rounded-full bg-primary shrink-0" /> Diplomado en Habilidades Directivas para la Gestión en Salud</li>
             </ul>
           </div>
-          <div>
-            <h3 className="font-display text-2xl mb-2 text-foreground">Mi mirada</h3>
-            <p>
-              Concibo la terapia como un proceso colaborativo, enfocado en fortalecer recursos
-              personales y favorecer el bienestar emocional, siempre desde una mirada respetuosa de
-              la historia, los ritmos y la singularidad de cada persona. Mi objetivo es acompañar a
-              cada persona a comprenderse con mayor claridad y compasión, reconocer sus fortalezas,
-              aliviar aquello que hoy genera sufrimiento y construir herramientas que le permitan
-              avanzar hacia una vida más equilibrada y satisfactoria. Creo profundamente en la
-              capacidad de las personas para generar cambios significativos cuando encuentran un
-              espacio seguro donde sentirse escuchadas, comprendidas y acompañadas.
-            </p>
-          </div>
         </div>
       </section>
+
 
       {/* SERVICIOS */}
       <section id="servicios" className="scroll-mt-24 bg-gradient-soft py-16 md:py-24">
@@ -199,7 +187,21 @@ function Index() {
               </li>
             ))}
           </ul>
+          <div className="mt-8">
+            <h3 className="font-display text-2xl mb-3 text-foreground">Mi mirada</h3>
+            <p className="text-muted-foreground leading-relaxed">
+              Concibo la terapia como un proceso colaborativo, enfocado en fortalecer recursos
+              personales y favorecer el bienestar emocional, siempre desde una mirada respetuosa de
+              la historia, los ritmos y la singularidad de cada persona. Mi objetivo es acompañar a
+              cada persona a comprenderse con mayor claridad y compasión, reconocer sus fortalezas,
+              aliviar aquello que hoy genera sufrimiento y construir herramientas que le permitan
+              avanzar hacia una vida más equilibrada y satisfactoria. Creo profundamente en la
+              capacidad de las personas para generar cambios significativos cuando encuentran un
+              espacio seguro donde sentirse escuchadas, comprendidas y acompañadas.
+            </p>
+          </div>
         </div>
+
         <img
           src={enfoqueImg}
           alt="Cuidado y crecimiento emocional"
