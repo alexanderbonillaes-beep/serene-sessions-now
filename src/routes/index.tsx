@@ -89,9 +89,11 @@ function Index() {
           <p className="text-xs uppercase tracking-[0.25em] text-primary/80">Sobre mí</p>
           <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-foreground leading-tight">Hola, soy Alexander.</h2>
           <p>
-            Psicólogo clínico titulado de la Universidad de La Serena (2017), con formación y
-            experiencia clínica en psicoterapia infanto-juvenil, adultez joven y familia, orientación
-            sistémica breve y abordaje integral de la salud mental.
+            Psicólogo Clínico titulado de la Universidad de La Serena (2017), con más de ocho años
+            de experiencia clínica en psicoterapia infanto-juvenil, adultez joven y familia
+            acompañando problemáticas de salud mental de mediana y severa complejidad en la red
+            pública de salud como en el ámbito privado. Con formación sistémica breve y abordaje
+            integral de la salud mental.
           </p>
           <p>
             Acompaño procesos terapéuticos desde el respeto, la contención emocional y el vínculo
