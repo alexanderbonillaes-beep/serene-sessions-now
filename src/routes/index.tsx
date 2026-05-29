@@ -60,7 +60,7 @@ function Index() {
               </a>
             </div>
             <div className="mt-8 md:mt-10 flex flex-wrap gap-4 md:gap-6 text-xs text-muted-foreground">
-              {["Consulta presencial", "Enfoque basado en evidencia", "Mirada humana y cálida"].map((t) => (
+              {["Consulta presencial", "Enfoque Constructivista Sistémico", "Mirada humana y cálida"].map((t) => (
                 <div key={t} className="flex items-center gap-2">
                   <CheckCircle2 className="h-4 w-4 text-primary shrink-0" /> {t}
                 </div>
@@ -110,10 +110,12 @@ function Index() {
           <div>
             <h3 className="font-display text-2xl mb-2 text-foreground">Formación especializada</h3>
             <ul className="space-y-2 text-foreground/80">
-              <li className="flex gap-3"><span className="text-primary mt-1.5 h-1.5 w-1.5 rounded-full bg-primary shrink-0" /> Diploma en Intervenciones Terapéuticas en Infancia, Adolescencia y Familia</li>
               <li className="flex gap-3"><span className="text-primary mt-1.5 h-1.5 w-1.5 rounded-full bg-primary shrink-0" /> Postítulo en Psicoterapia Sistémica Breve</li>
-              <li className="flex gap-3"><span className="text-primary mt-1.5 h-1.5 w-1.5 rounded-full bg-primary shrink-0" /> Formación en Arteterapia</li>
-              <li className="flex gap-3"><span className="text-primary mt-1.5 h-1.5 w-1.5 rounded-full bg-primary shrink-0" /> Formación en Sexualidad Humana</li>
+              <li className="flex gap-3"><span className="text-primary mt-1.5 h-1.5 w-1.5 rounded-full bg-primary shrink-0" /> Diplomado en Intervenciones Terapéuticas en Infancia y Adolescencia</li>
+              <li className="flex gap-3"><span className="text-primary mt-1.5 h-1.5 w-1.5 rounded-full bg-primary shrink-0" /> Diplomado en Arteterapia</li>
+              <li className="flex gap-3"><span className="text-primary mt-1.5 h-1.5 w-1.5 rounded-full bg-primary shrink-0" /> Diplomado en Sexualidad Humana</li>
+              <li className="flex gap-3"><span className="text-primary mt-1.5 h-1.5 w-1.5 rounded-full bg-primary shrink-0" /> Diplomado en Promoción de una Convivencia Libre de Violencia</li>
+              <li className="flex gap-3"><span className="text-primary mt-1.5 h-1.5 w-1.5 rounded-full bg-primary shrink-0" /> Diplomado en Habilidades Directivas para la Gestión en Salud</li>
             </ul>
           </div>
           <div>
