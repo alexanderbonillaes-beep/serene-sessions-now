@@ -125,8 +125,12 @@ function Index() {
             <p>
               Concibo la terapia como un proceso colaborativo, enfocado en fortalecer recursos
               personales y favorecer el bienestar emocional, siempre desde una mirada respetuosa de
-              la historia, los ritmos y la singularidad de cada persona. He participado como expositor
-              y docente en Primeros Auxilios Psicológicos (PAP), identidades y sexualidad humana.
+              la historia, los ritmos y la singularidad de cada persona. Mi objetivo es acompañar a
+              cada persona a comprenderse con mayor claridad y compasión, reconocer sus fortalezas,
+              aliviar aquello que hoy genera sufrimiento y construir herramientas que le permitan
+              avanzar hacia una vida más equilibrada y satisfactoria. Creo profundamente en la
+              capacidad de las personas para generar cambios significativos cuando encuentran un
+              espacio seguro donde sentirse escuchadas, comprendidas y acompañadas.
             </p>
           </div>
         </div>
