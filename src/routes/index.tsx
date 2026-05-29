@@ -129,6 +129,14 @@ function Index() {
               <li className="flex gap-3"><span className="text-primary mt-1.5 h-1.5 w-1.5 rounded-full bg-primary shrink-0" /> Participación en actividades formativas dirigidas a equipos, instituciones y comunidades.</li>
             </ul>
           </div>
+          <p>
+            He participado en acciones de apoyo a la salud mental en contextos de emergencias y
+            desastres, incluyendo despliegues profesionales en zonas afectadas a lo largo del país.
+            Estas experiencias han fortalecido mi comprensión del impacto que las crisis tienen en
+            las personas, las familias y las comunidades, reafirmando la importancia de una
+            atención humana, cercana y respetuosa.
+          </p>
+
 
         </div>
       </section>
