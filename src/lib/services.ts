@@ -33,8 +33,8 @@ export const services = [
   },
   {
     icon: Sparkles,
-    title: "Arteterapia",
-    desc: "Recursos expresivos y creativos integrados al proceso terapéutico para favorecer la elaboración emocional.",
-    topics: ["Creatividad", "Expresión", "Emoción"],
+    title: "Talleres",
+    desc: "Talleres vivenciales y grupales que integran recursos expresivos, reflexivos y creativos para promover el autoconocimiento, la regulación emocional y el bienestar colectivo.",
+    topics: ["Grupal", "Vivencial", "Bienestar"],
   },
 ];
