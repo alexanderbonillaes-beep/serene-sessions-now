@@ -121,11 +121,15 @@ export function ReviewsSection() {
         {/* Carrusel */}
         {reviews.length > 0 ? (
           <div
-            className="relative overflow-hidden mb-16 [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]"
+            className={
+              shouldMarquee
+                ? "relative overflow-hidden mb-16 [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]"
+                : "mb-16"
+            }
           >
             <div
-              className="flex gap-6 animate-marquee"
-              style={{ animationDuration: `${Math.max(30, reviews.length * 8)}s` }}
+              className={shouldMarquee ? "flex gap-6 animate-marquee" : "flex gap-6 flex-wrap justify-center"}
+              style={shouldMarquee ? { animationDuration: `${Math.max(30, reviews.length * 8)}s` } : undefined}
             >
               {marquee.map((r, i) => (
                 <article
