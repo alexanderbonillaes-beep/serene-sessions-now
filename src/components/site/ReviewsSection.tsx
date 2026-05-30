@@ -115,6 +115,7 @@ export function ReviewsSection() {
   const scrollerRef = useRef<HTMLDivElement | null>(null);
   const pausedRef = useRef(false);
   const resumeTimerRef = useRef<number | null>(null);
+  const isDraggingRef = useRef(false);
 
   useEffect(() => {
     const el = scrollerRef.current;
