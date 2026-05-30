@@ -1,8 +1,7 @@
-import { useEffect, useRef, useState } from "react";
-import { useServerFn } from "@tanstack/react-start";
+import { useEffect, useState } from "react";
 import { Star, Loader2, Quote } from "lucide-react";
 import { toast } from "sonner";
-import { submitReview, listReviews } from "@/lib/reviews.functions";
+import { supabase } from "@/integrations/supabase/client";
 
 type Review = {
   id: string;
@@ -40,9 +39,6 @@ function Stars({ value, onChange, size = "h-6 w-6" }: { value: number; onChange?
 }
 
 export function ReviewsSection() {
-  const submit = useServerFn(submitReview);
-  const fetchReviews = useServerFn(listReviews);
-
   const [reviews, setReviews] = useState<Review[]>([]);
   const [loading, setLoading] = useState(false);
 
@@ -53,17 +49,19 @@ export function ReviewsSection() {
   const [comment, setComment] = useState("");
 
   async function refresh() {
-    try {
-      const res = await fetchReviews();
-      setReviews(res.reviews as Review[]);
-    } catch {
-      /* ignore */
-    }
+    const { data, error } = await supabase
+      .from("reviews")
+      .select("id, name, is_anonymous, city, comment, rating, created_at")
+      .eq("status", "approved")
+      .order("created_at", { ascending: false })
+      .limit(30);
+    if (!error && data) setReviews(data as Review[]);
   }
 
   useEffect(() => {
     refresh();
   }, []);
+
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -74,8 +72,8 @@ export function ReviewsSection() {
     }
     setLoading(true);
     try {
-      const res = await submit({
-        data: {
+      const { data: res, error } = await supabase.functions.invoke("submit-review", {
+        body: {
           name: isAnonymous ? undefined : name.trim() || undefined,
           isAnonymous,
           city: city.trim(),
@@ -83,7 +81,8 @@ export function ReviewsSection() {
           rating,
         },
       });
-      if (res.success) {
+      if (error) throw error;
+      if (res?.success) {
         toast.success("¡Gracias por tu reseña!");
         setName("");
         setCity("");
@@ -92,12 +91,13 @@ export function ReviewsSection() {
         setIsAnonymous(false);
         refresh();
       } else {
-        toast.error(res.error);
+        toast.error(res?.error || "No se pudo publicar la reseña.");
       }
     } catch (err) {
       console.error(err);
       toast.error("Ocurrió un error al enviar la reseña.");
     } finally {
+
       setLoading(false);
     }
   }
