@@ -6,12 +6,14 @@ import careImg from "@/assets/care.jpg";
 import enfoqueImg from "@/assets/enfoque.jpg";
 import fotoArsam from "@/assets/foto-arsam.jpeg";
 import fotoRelatoria from "@/assets/foto-relatoria.jpeg";
+import fotoSesion from "@/assets/foto-sesion.jpeg";
 
 import { services } from "@/lib/services";
 import { EMAIL, INSTAGRAM_URL, INSTAGRAM_HANDLE, ADDRESS, MAP_EMBED_URL, MAP_LINK } from "@/lib/contact";
 import { ReviewsSection } from "@/components/site/ReviewsSection";
 
 const aboutSlides = [
+  { src: fotoSesion, alt: "Alexander durante una sesión de terapia en consulta" },
   { src: fotoRelatoria, alt: "Alexander exponiendo en charla sobre salud mental en contexto crítico" },
   { src: fotoArsam, alt: "Despliegue en terreno con Equipo ARSAM en zona afectada" },
 ];
