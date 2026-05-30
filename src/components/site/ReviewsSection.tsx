@@ -123,7 +123,8 @@ export function ReviewsSection() {
 
     let raf = 0;
     let last = performance.now();
-    const pxPerSec = 25; // velocidad lenta
+    let pos = el.scrollLeft;
+    const pxPerSec = 30; // velocidad lenta
 
     const step = (now: number) => {
       const dt = (now - last) / 1000;
@@ -131,10 +132,13 @@ export function ReviewsSection() {
       if (!pausedRef.current && !isDraggingRef.current) {
         const half = el.scrollWidth / 2;
         if (half > 0) {
-          let next = el.scrollLeft + pxPerSec * dt;
-          if (next >= half) next -= half;
-          el.scrollLeft = next;
+          pos += pxPerSec * dt;
+          if (pos >= half) pos -= half;
+          el.scrollLeft = pos;
         }
+      } else {
+        // El usuario movió el scroll manualmente; sincronizar.
+        pos = el.scrollLeft;
       }
       raf = requestAnimationFrame(step);
     };
