@@ -75,11 +75,25 @@ export const submitReview = createServerFn({ method: "POST" })
       };
     }
 
+    const cityNorm = data.city.trim();
+    const commentNorm = data.comment.trim();
+
+    // Prevent duplicate reviews (same comment + city already exists)
+    const { data: existing } = await supabaseAdmin
+      .from("reviews")
+      .select("id")
+      .eq("city", cityNorm)
+      .eq("comment", commentNorm)
+      .limit(1);
+    if (existing && existing.length > 0) {
+      return { success: false as const, error: "Esta reseña ya fue publicada anteriormente." };
+    }
+
     const insert = {
       name: data.isAnonymous ? null : (data.name?.trim() || null),
       is_anonymous: data.isAnonymous || !data.name?.trim(),
-      city: data.city.trim(),
-      comment: data.comment.trim(),
+      city: cityNorm,
+      comment: commentNorm,
       rating: data.rating,
       status: "approved",
     };

@@ -102,8 +102,10 @@ export function ReviewsSection() {
     }
   }
 
-  // Duplicate list for seamless marquee
-  const marquee = reviews.length > 0 ? [...reviews, ...reviews] : [];
+  // Duplicate list for seamless marquee only when there are enough reviews to scroll.
+  // With few reviews, show them once (centered) to avoid visual repetition.
+  const shouldMarquee = reviews.length >= 4;
+  const marquee = shouldMarquee ? [...reviews, ...reviews] : reviews;
 
   return (
     <section id="resenas" className="scroll-mt-24 py-24 bg-gradient-warm/40">
@@ -119,11 +121,15 @@ export function ReviewsSection() {
         {/* Carrusel */}
         {reviews.length > 0 ? (
           <div
-            className="relative overflow-hidden mb-16 [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]"
+            className={
+              shouldMarquee
+                ? "relative overflow-hidden mb-16 [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]"
+                : "mb-16"
+            }
           >
             <div
-              className="flex gap-6 animate-marquee"
-              style={{ animationDuration: `${Math.max(30, reviews.length * 8)}s` }}
+              className={shouldMarquee ? "flex gap-6 animate-marquee" : "flex gap-6 flex-wrap justify-center"}
+              style={shouldMarquee ? { animationDuration: `${Math.max(30, reviews.length * 8)}s` } : undefined}
             >
               {marquee.map((r, i) => (
                 <article
