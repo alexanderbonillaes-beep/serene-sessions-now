@@ -225,7 +225,10 @@ export function ReviewsSection() {
                   key={`${r.id}-${i}`}
                   className="shrink-0 w-[280px] sm:w-[320px] md:w-[360px] rounded-3xl bg-card border border-border/60 p-6 shadow-sm select-none"
                 >
-                  <Quote className="h-6 w-6 text-primary/40 mb-3" />
+                  <div className="flex items-start justify-between mb-3">
+                    <Quote className="h-6 w-6 text-primary/40" />
+                    <span className="text-[9px] font-mono text-muted-foreground/40 tabular-nums leading-none mt-1">#{r.id.slice(0, 6)}</span>
+                  </div>
                   <Stars value={r.rating} size="h-4 w-4" />
                   <p className="mt-4 text-sm text-foreground/85 leading-relaxed line-clamp-6">{r.comment}</p>
                   <div className="mt-5 pt-4 border-t border-border/60">
