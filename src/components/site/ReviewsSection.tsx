@@ -91,8 +91,12 @@ export function ReviewsSection() {
         setIsAnonymous(false);
         refresh();
       } else {
-        toast.error(res?.error || "No se pudo publicar la reseña.");
+        toast.error("Reseña no permitida", {
+          description: res?.error || "Tu reseña contiene contenido ofensivo o no apropiado. Por favor, redáctala con respeto.",
+          duration: 6000,
+        });
       }
+
     } catch (err) {
       console.error(err);
       toast.error("Ocurrió un error al enviar la reseña.");
