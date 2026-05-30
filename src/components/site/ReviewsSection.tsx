@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Star, Loader2, Quote } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
@@ -106,13 +106,71 @@ export function ReviewsSection() {
     }
   }
 
-  // Siempre carrusel: duplicamos las reseñas las veces necesarias para que el
-  // marquee se vea continuo aunque haya pocas.
+  // Duplicamos las reseñas para que el carrusel se vea continuo aunque haya pocas.
   const minCards = 8;
   const repeats = reviews.length > 0 ? Math.max(2, Math.ceil(minCards / reviews.length)) : 0;
   const marquee = Array.from({ length: repeats }, () => reviews).flat();
-  // Velocidad lenta: ~12s por tarjeta.
-  const durationSec = Math.max(40, marquee.length * 12);
+
+  // Auto-scroll lento con pausa al interactuar (swipe/drag/hover).
+  const scrollerRef = useRef<HTMLDivElement | null>(null);
+  const pausedRef = useRef(false);
+  const resumeTimerRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    const el = scrollerRef.current;
+    if (!el || reviews.length === 0) return;
+
+    let raf = 0;
+    let last = performance.now();
+    const pxPerSec = 25; // velocidad lenta
+
+    const step = (now: number) => {
+      const dt = (now - last) / 1000;
+      last = now;
+      if (!pausedRef.current) {
+        const half = el.scrollWidth / 2;
+        let next = el.scrollLeft + pxPerSec * dt;
+        if (next >= half) next -= half;
+        el.scrollLeft = next;
+      }
+      raf = requestAnimationFrame(step);
+    };
+    raf = requestAnimationFrame(step);
+
+    const pause = () => {
+      pausedRef.current = true;
+      if (resumeTimerRef.current) window.clearTimeout(resumeTimerRef.current);
+    };
+    const resumeSoon = () => {
+      if (resumeTimerRef.current) window.clearTimeout(resumeTimerRef.current);
+      resumeTimerRef.current = window.setTimeout(() => {
+        pausedRef.current = false;
+      }, 1500);
+    };
+
+    el.addEventListener("pointerdown", pause);
+    el.addEventListener("pointerup", resumeSoon);
+    el.addEventListener("pointercancel", resumeSoon);
+    el.addEventListener("pointerleave", resumeSoon);
+    el.addEventListener("mouseenter", pause);
+    el.addEventListener("mouseleave", resumeSoon);
+    el.addEventListener("touchstart", pause, { passive: true });
+    el.addEventListener("touchend", resumeSoon);
+    el.addEventListener("wheel", () => { pause(); resumeSoon(); }, { passive: true });
+
+    return () => {
+      cancelAnimationFrame(raf);
+      if (resumeTimerRef.current) window.clearTimeout(resumeTimerRef.current);
+      el.removeEventListener("pointerdown", pause);
+      el.removeEventListener("pointerup", resumeSoon);
+      el.removeEventListener("pointercancel", resumeSoon);
+      el.removeEventListener("pointerleave", resumeSoon);
+      el.removeEventListener("mouseenter", pause);
+      el.removeEventListener("mouseleave", resumeSoon);
+      el.removeEventListener("touchstart", pause);
+      el.removeEventListener("touchend", resumeSoon);
+    };
+  }, [reviews.length, marquee.length]);
 
   return (
     <section id="resenas" className="scroll-mt-24 py-24 bg-gradient-warm/40">
@@ -127,15 +185,16 @@ export function ReviewsSection() {
 
         {/* Carrusel */}
         {reviews.length > 0 ? (
-          <div className="relative overflow-hidden mb-16 [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">
+          <div className="relative mb-16 [mask-image:linear-gradient(to_right,transparent,black_6%,black_94%,transparent)]">
             <div
-              className="flex gap-6 animate-marquee w-max"
-              style={{ animationDuration: `${durationSec}s` }}
+              ref={scrollerRef}
+              className="flex gap-6 overflow-x-auto overflow-y-hidden no-scrollbar touch-pan-x cursor-grab active:cursor-grabbing scroll-smooth"
+              style={{ scrollbarWidth: "none" }}
             >
               {marquee.map((r, i) => (
                 <article
                   key={`${r.id}-${i}`}
-                  className="shrink-0 w-[320px] md:w-[360px] rounded-3xl bg-card border border-border/60 p-6 shadow-sm"
+                  className="shrink-0 w-[280px] sm:w-[320px] md:w-[360px] rounded-3xl bg-card border border-border/60 p-6 shadow-sm select-none"
                 >
                   <Quote className="h-6 w-6 text-primary/40 mb-3" />
                   <Stars value={r.rating} size="h-4 w-4" />
