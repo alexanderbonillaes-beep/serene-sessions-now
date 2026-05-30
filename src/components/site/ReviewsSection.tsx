@@ -41,6 +41,16 @@ function Stars({ value, onChange, size = "h-6 w-6" }: { value: number; onChange?
 export function ReviewsSection() {
   const [reviews, setReviews] = useState<Review[]>([]);
   const [loading, setLoading] = useState(false);
+  const [expanded, setExpanded] = useState<Set<string>>(new Set());
+
+  function toggleExpand(key: string, e: React.MouseEvent) {
+    e.stopPropagation();
+    setExpanded(prev => {
+      const next = new Set(prev);
+      if (next.has(key)) next.delete(key); else next.add(key);
+      return next;
+    });
+  }
 
   const [rating, setRating] = useState(5);
   const [isAnonymous, setIsAnonymous] = useState(false);
@@ -220,23 +230,37 @@ export function ReviewsSection() {
               className="flex gap-6 overflow-x-auto overflow-y-hidden no-scrollbar touch-pan-x cursor-grab active:cursor-grabbing"
               style={{ scrollbarWidth: "none" }}
             >
-              {marquee.map((r, i) => (
-                <article
-                  key={`${r.id}-${i}`}
-                  className="shrink-0 w-[280px] sm:w-[320px] md:w-[360px] rounded-3xl bg-card border border-border/60 p-6 shadow-sm select-none"
-                >
-                  <div className="flex items-start justify-between mb-3">
-                    <Quote className="h-6 w-6 text-primary/40" />
-                    <span className="text-[9px] font-mono text-muted-foreground/40 tabular-nums leading-none mt-1 select-text cursor-text">#{r.id.slice(0, 6)}</span>
-                  </div>
-                  <Stars value={r.rating} size="h-4 w-4" />
-                  <p className="mt-4 text-sm text-foreground/85 leading-relaxed line-clamp-6">{r.comment}</p>
-                  <div className="mt-5 pt-4 border-t border-border/60">
-                    <p className="font-display text-base">{r.is_anonymous || !r.name ? "Anónimo" : r.name}</p>
-                    <p className="text-xs text-muted-foreground">{r.city}</p>
-                  </div>
-                </article>
-              ))}
+              {marquee.map((r, i) => {
+                const cardKey = `${r.id}-${i}`;
+                const isExpanded = expanded.has(cardKey);
+                const isLong = r.comment.length > 200;
+                return (
+                  <article
+                    key={cardKey}
+                    className="shrink-0 w-[280px] sm:w-[320px] md:w-[360px] rounded-3xl bg-card border border-border/60 p-6 shadow-sm select-none"
+                  >
+                    <div className="flex items-start justify-between mb-3">
+                      <Quote className="h-6 w-6 text-primary/40" />
+                      <span className="text-[9px] font-mono text-muted-foreground/40 tabular-nums leading-none mt-1 select-text cursor-text">#{r.id.slice(0, 6)}</span>
+                    </div>
+                    <Stars value={r.rating} size="h-4 w-4" />
+                    <p className={`mt-4 text-sm text-foreground/85 leading-relaxed ${isExpanded ? "" : "line-clamp-6"}`}>{r.comment}</p>
+                    {isLong && (
+                      <button
+                        type="button"
+                        onClick={(e) => toggleExpand(cardKey, e)}
+                        className="mt-2 text-xs text-primary/60 hover:text-primary transition-colors select-none"
+                      >
+                        {isExpanded ? "Ver menos" : "Ver más"}
+                      </button>
+                    )}
+                    <div className="mt-5 pt-4 border-t border-border/60">
+                      <p className="font-display text-base">{r.is_anonymous || !r.name ? "Anónimo" : r.name}</p>
+                      <p className="text-xs text-muted-foreground">{r.city}</p>
+                    </div>
+                  </article>
+                );
+              })}
             </div>
           </div>
         ) : (
