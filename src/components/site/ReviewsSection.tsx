@@ -102,8 +102,10 @@ export function ReviewsSection() {
     }
   }
 
-  // Duplicate list for seamless marquee
-  const marquee = reviews.length > 0 ? [...reviews, ...reviews] : [];
+  // Duplicate list for seamless marquee only when there are enough reviews to scroll.
+  // With few reviews, show them once (centered) to avoid visual repetition.
+  const shouldMarquee = reviews.length >= 4;
+  const marquee = shouldMarquee ? [...reviews, ...reviews] : reviews;
 
   return (
     <section id="resenas" className="scroll-mt-24 py-24 bg-gradient-warm/40">
