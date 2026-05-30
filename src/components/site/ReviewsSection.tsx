@@ -115,6 +115,7 @@ export function ReviewsSection() {
   const scrollerRef = useRef<HTMLDivElement | null>(null);
   const pausedRef = useRef(false);
   const resumeTimerRef = useRef<number | null>(null);
+  const isDraggingRef = useRef(false);
 
   useEffect(() => {
     const el = scrollerRef.current;
@@ -127,11 +128,13 @@ export function ReviewsSection() {
     const step = (now: number) => {
       const dt = (now - last) / 1000;
       last = now;
-      if (!pausedRef.current) {
+      if (!pausedRef.current && !isDraggingRef.current) {
         const half = el.scrollWidth / 2;
-        let next = el.scrollLeft + pxPerSec * dt;
-        if (next >= half) next -= half;
-        el.scrollLeft = next;
+        if (half > 0) {
+          let next = el.scrollLeft + pxPerSec * dt;
+          if (next >= half) next -= half;
+          el.scrollLeft = next;
+        }
       }
       raf = requestAnimationFrame(step);
     };
@@ -148,26 +151,48 @@ export function ReviewsSection() {
       }, 1500);
     };
 
-    el.addEventListener("pointerdown", pause);
-    el.addEventListener("pointerup", resumeSoon);
-    el.addEventListener("pointercancel", resumeSoon);
-    el.addEventListener("pointerleave", resumeSoon);
-    el.addEventListener("mouseenter", pause);
-    el.addEventListener("mouseleave", resumeSoon);
-    el.addEventListener("touchstart", pause, { passive: true });
+    // Drag con mouse (desktop) — táctil ya funciona con overflow-x-auto.
+    let startX = 0;
+    let startScroll = 0;
+
+    const onPointerDown = (e: PointerEvent) => {
+      // Solo para mouse/pen: el táctil usa scroll nativo.
+      if (e.pointerType === "touch") {
+        pause();
+        return;
+      }
+      isDraggingRef.current = true;
+      pause();
+      startX = e.clientX;
+      startScroll = el.scrollLeft;
+      el.setPointerCapture(e.pointerId);
+    };
+    const onPointerMove = (e: PointerEvent) => {
+      if (!isDraggingRef.current) return;
+      el.scrollLeft = startScroll - (e.clientX - startX);
+    };
+    const onPointerUp = (e: PointerEvent) => {
+      if (isDraggingRef.current) {
+        isDraggingRef.current = false;
+        try { el.releasePointerCapture(e.pointerId); } catch {}
+      }
+      resumeSoon();
+    };
+
+    el.addEventListener("pointerdown", onPointerDown);
+    el.addEventListener("pointermove", onPointerMove);
+    el.addEventListener("pointerup", onPointerUp);
+    el.addEventListener("pointercancel", onPointerUp);
     el.addEventListener("touchend", resumeSoon);
     el.addEventListener("wheel", () => { pause(); resumeSoon(); }, { passive: true });
 
     return () => {
       cancelAnimationFrame(raf);
       if (resumeTimerRef.current) window.clearTimeout(resumeTimerRef.current);
-      el.removeEventListener("pointerdown", pause);
-      el.removeEventListener("pointerup", resumeSoon);
-      el.removeEventListener("pointercancel", resumeSoon);
-      el.removeEventListener("pointerleave", resumeSoon);
-      el.removeEventListener("mouseenter", pause);
-      el.removeEventListener("mouseleave", resumeSoon);
-      el.removeEventListener("touchstart", pause);
+      el.removeEventListener("pointerdown", onPointerDown);
+      el.removeEventListener("pointermove", onPointerMove);
+      el.removeEventListener("pointerup", onPointerUp);
+      el.removeEventListener("pointercancel", onPointerUp);
       el.removeEventListener("touchend", resumeSoon);
     };
   }, [reviews.length, marquee.length]);
@@ -188,7 +213,7 @@ export function ReviewsSection() {
           <div className="relative mb-16 [mask-image:linear-gradient(to_right,transparent,black_6%,black_94%,transparent)]">
             <div
               ref={scrollerRef}
-              className="flex gap-6 overflow-x-auto overflow-y-hidden no-scrollbar touch-pan-x cursor-grab active:cursor-grabbing scroll-smooth"
+              className="flex gap-6 overflow-x-auto overflow-y-hidden no-scrollbar touch-pan-x cursor-grab active:cursor-grabbing"
               style={{ scrollbarWidth: "none" }}
             >
               {marquee.map((r, i) => (
