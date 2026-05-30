@@ -1,12 +1,68 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, CheckCircle2, Sparkles, MapPin, Mail, Instagram, Clock, Calendar } from "lucide-react";
+import { useState } from "react";
+import { ArrowRight, CheckCircle2, Sparkles, MapPin, Mail, Instagram, Clock, Calendar, ChevronLeft, ChevronRight } from "lucide-react";
 import heroImg from "@/assets/hero.jpg";
 import careImg from "@/assets/care.jpg";
 import enfoqueImg from "@/assets/enfoque.jpg";
+import fotoArsam from "@/assets/foto-arsam.jpeg";
+import fotoRelatoria from "@/assets/foto-relatoria.jpeg";
 
 import { services } from "@/lib/services";
 import { EMAIL, INSTAGRAM_URL, INSTAGRAM_HANDLE, ADDRESS, MAP_EMBED_URL, MAP_LINK } from "@/lib/contact";
 import { ReviewsSection } from "@/components/site/ReviewsSection";
+
+const aboutSlides = [
+  { src: fotoRelatoria, alt: "Alexander exponiendo en charla sobre salud mental en contexto crítico" },
+  { src: fotoArsam, alt: "Despliegue en terreno con Equipo ARSAM en zona afectada" },
+];
+
+function AboutCarousel() {
+  const [i, setI] = useState(0);
+  const prev = () => setI((p) => (p - 1 + aboutSlides.length) % aboutSlides.length);
+  const next = () => setI((p) => (p + 1) % aboutSlides.length);
+  return (
+    <div className="order-2 md:order-1 relative w-full">
+      <div className="relative w-full overflow-hidden rounded-[2rem] md:rounded-[2.5rem] aspect-[4/5] shadow-xl bg-muted">
+        {aboutSlides.map((s, idx) => (
+          <img
+            key={idx}
+            src={s.src}
+            alt={s.alt}
+            loading="lazy"
+            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${idx === i ? "opacity-100" : "opacity-0"}`}
+          />
+        ))}
+        <button
+          type="button"
+          onClick={prev}
+          aria-label="Imagen anterior"
+          className="absolute left-3 top-1/2 -translate-y-1/2 h-10 w-10 rounded-full bg-background/80 backdrop-blur border border-border flex items-center justify-center hover:bg-background transition"
+        >
+          <ChevronLeft className="h-5 w-5" />
+        </button>
+        <button
+          type="button"
+          onClick={next}
+          aria-label="Imagen siguiente"
+          className="absolute right-3 top-1/2 -translate-y-1/2 h-10 w-10 rounded-full bg-background/80 backdrop-blur border border-border flex items-center justify-center hover:bg-background transition"
+        >
+          <ChevronRight className="h-5 w-5" />
+        </button>
+        <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2">
+          {aboutSlides.map((_, idx) => (
+            <button
+              key={idx}
+              type="button"
+              onClick={() => setI(idx)}
+              aria-label={`Ir a imagen ${idx + 1}`}
+              className={`h-2 rounded-full transition-all ${idx === i ? "w-6 bg-primary" : "w-2 bg-background/70"}`}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
 
 
 export const Route = createFileRoute("/")({
@@ -84,7 +140,7 @@ function Index() {
 
       {/* SOBRE MÍ */}
       <section id="sobre-mi" className="scroll-mt-24 mx-auto max-w-5xl px-4 sm:px-6 py-16 md:py-24 grid md:grid-cols-2 gap-8 md:gap-12 items-start">
-        <img src={careImg} alt="" loading="lazy" className="order-2 md:order-1 w-full rounded-[2rem] md:rounded-[2.5rem] aspect-[4/5] object-cover shadow-xl" />
+        <AboutCarousel />
         <div className="order-1 md:order-2 space-y-6 text-foreground/85 leading-relaxed">
           <p className="text-xs uppercase tracking-[0.25em] text-primary/80">Sobre mí</p>
           <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-foreground leading-tight">Hola, soy Alexander.</h2>
