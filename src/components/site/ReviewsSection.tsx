@@ -72,8 +72,8 @@ export function ReviewsSection() {
     }
     setLoading(true);
     try {
-      const res = await submit({
-        data: {
+      const { data: res, error } = await supabase.functions.invoke("submit-review", {
+        body: {
           name: isAnonymous ? undefined : name.trim() || undefined,
           isAnonymous,
           city: city.trim(),
@@ -81,7 +81,8 @@ export function ReviewsSection() {
           rating,
         },
       });
-      if (res.success) {
+      if (error) throw error;
+      if (res?.success) {
         toast.success("¡Gracias por tu reseña!");
         setName("");
         setCity("");
@@ -90,12 +91,13 @@ export function ReviewsSection() {
         setIsAnonymous(false);
         refresh();
       } else {
-        toast.error(res.error);
+        toast.error(res?.error || "No se pudo publicar la reseña.");
       }
     } catch (err) {
       console.error(err);
       toast.error("Ocurrió un error al enviar la reseña.");
     } finally {
+
       setLoading(false);
     }
   }
