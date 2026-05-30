@@ -84,11 +84,12 @@ Deno.serve(async (req) => {
       return new Response(
         JSON.stringify({
           success: false,
-          error: "No pudimos publicar tu reseña: contiene lenguaje ofensivo o contenido no permitido.",
+          error: "No se permiten reseñas con lenguaje ofensivo, insultos ni contenido inapropiado. Por favor, redáctala con respeto.",
         }),
         { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } },
       );
     }
+
 
     const supabase = createClient(
       Deno.env.get("SUPABASE_URL")!,
