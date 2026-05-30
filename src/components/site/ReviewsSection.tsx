@@ -227,7 +227,7 @@ export function ReviewsSection() {
                 >
                   <div className="flex items-start justify-between mb-3">
                     <Quote className="h-6 w-6 text-primary/40" />
-                    <span className="text-[9px] font-mono text-muted-foreground/40 tabular-nums leading-none mt-1">#{r.id.slice(0, 6)}</span>
+                    <span className="text-[9px] font-mono text-muted-foreground/40 tabular-nums leading-none mt-1 select-text cursor-text">#{r.id.slice(0, 6)}</span>
                   </div>
                   <Stars value={r.rating} size="h-4 w-4" />
                   <p className="mt-4 text-sm text-foreground/85 leading-relaxed line-clamp-6">{r.comment}</p>
