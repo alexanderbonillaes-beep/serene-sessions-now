@@ -53,27 +53,82 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   );
 }
 
+const SITE_URL = "https://www.psalexanderbonilla.cl";
+const DEFAULT_TITLE = "Psicólogo en La Serena, Coquimbo y Ovalle | Alexander Bonilla";
+const DEFAULT_DESC = "Psicólogo clínico en La Serena, Coquimbo, Ovalle y Vicuña. Terapia para ansiedad, depresión, autoestima y neurodivergencias. Atención particular, convenios Fonasa e Isapre. Online y presencial.";
+const OG_IMAGE = "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/a1530940-14cb-48de-b7ca-2172bf747ddf";
+
+const ORG_JSONLD = {
+  "@context": "https://schema.org",
+  "@type": ["LocalBusiness", "MedicalBusiness", "Psychologist"],
+  name: "Alexander Bonilla — Psicólogo Clínico",
+  image: OG_IMAGE,
+  url: SITE_URL,
+  telephone: "+56972337319",
+  email: "ps.alexanderbonilla@gmail.com",
+  priceRange: "$$",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "Av. Balmaceda 2195, Edificio Portal las Higueras Of. 401",
+    addressLocality: "La Serena",
+    addressRegion: "Coquimbo",
+    addressCountry: "CL",
+  },
+  geo: { "@type": "GeoCoordinates", latitude: -29.9027, longitude: -71.2519 },
+  areaServed: [
+    { "@type": "City", name: "La Serena" },
+    { "@type": "City", name: "Coquimbo" },
+    { "@type": "City", name: "Ovalle" },
+    { "@type": "City", name: "Vicuña" },
+    { "@type": "AdministrativeArea", name: "Región de Coquimbo" },
+    { "@type": "Country", name: "Chile" },
+  ],
+  openingHoursSpecification: [{
+    "@type": "OpeningHoursSpecification",
+    dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+    opens: "17:30",
+    closes: "21:30",
+  }],
+  sameAs: ["https://instagram.com/psalebonilla"],
+  medicalSpecialty: ["Psychiatric", "Psychotherapy"],
+  paymentAccepted: ["Particular", "Fonasa", "Isapre", "Transferencia", "Tarjeta"],
+};
+
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   head: () => ({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Alexander Bonilla | Psicólogo Clínico" },
-      { name: "description", content: "Acompañamiento psicológico cercano, humano y basado en evidencia. Terapia online y presencial para niños, adolescentes y adultos jóvenes." },
-      { property: "og:title", content: "Alexander Bonilla | Psicólogo Clínico" },
-      { property: "og:description", content: "Acompañamiento psicológico cercano, humano y basado en evidencia. Terapia online y presencial para niños, adolescentes y adultos jóvenes." },
+      { title: DEFAULT_TITLE },
+      { name: "description", content: DEFAULT_DESC },
+      { name: "keywords", content: "psicólogo La Serena, psicólogo Coquimbo, psicólogo Ovalle, psicólogo Vicuña, psicólogo Chile, psicólogo Fonasa, psicólogo Isapre, psicólogo particular, terapia psicológica La Serena, psicoterapia infantil La Serena, psicólogo adolescentes Coquimbo, psicólogo adultos jóvenes, psicólogo ansiedad, psicólogo depresión, psicólogo autoestima, psicólogo neurodivergencia, psicólogo TEA, psicólogo TDAH, terapia online Chile, psicólogo cerca de mí, terapia de pareja La Serena, psicólogo familiar Coquimbo, consejería en sexualidad, psicólogo clínico Chile" },
+      { name: "author", content: "Alexander Bonilla" },
+      { name: "robots", content: "index, follow, max-image-preview:large, max-snippet:-1" },
+      { name: "geo.region", content: "CL-CO" },
+      { name: "geo.placename", content: "La Serena, Coquimbo, Chile" },
+      { name: "geo.position", content: "-29.9027;-71.2519" },
+      { name: "ICBM", content: "-29.9027, -71.2519" },
+      { property: "og:title", content: DEFAULT_TITLE },
+      { property: "og:description", content: DEFAULT_DESC },
       { property: "og:type", content: "website" },
+      { property: "og:locale", content: "es_CL" },
+      { property: "og:site_name", content: "Alexander Bonilla — Psicólogo Clínico" },
+      { property: "og:url", content: SITE_URL },
+      { property: "og:image", content: OG_IMAGE },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Alexander Bonilla | Psicólogo Clínico" },
-      { name: "twitter:description", content: "Acompañamiento psicológico cercano, humano y basado en evidencia. Terapia online y presencial para niños, adolescentes y adultos jóvenes." },
-      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/a1530940-14cb-48de-b7ca-2172bf747ddf" },
-      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/a1530940-14cb-48de-b7ca-2172bf747ddf" },
+      { name: "twitter:title", content: DEFAULT_TITLE },
+      { name: "twitter:description", content: DEFAULT_DESC },
+      { name: "twitter:image", content: OG_IMAGE },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
       { rel: "icon", type: "image/png", href: "/favicon.png" },
       { rel: "apple-touch-icon", href: "/favicon.png" },
     ],
+    scripts: [{
+      type: "application/ld+json",
+      children: JSON.stringify(ORG_JSONLD),
+    }],
   }),
   shellComponent: RootShell,
   component: RootComponent,

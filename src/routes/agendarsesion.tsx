@@ -29,12 +29,13 @@ const RECEIPT_WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIC
 export const Route = createFileRoute("/agendarsesion")({
   head: () => ({
     meta: [
-      { title: "Agendar sesión — Reserva tu cita | Alexander Bonilla" },
-      { name: "description", content: "Reserva tu sesión de terapia con Alexander Bonilla de forma rápida y sencilla a través de Calendly." },
-      { property: "og:title", content: "Agendar sesión — Alexander Bonilla" },
-      { property: "og:description", content: "Reserva tu sesión de terapia presencial." },
+      { title: "Agendar sesión de psicología — La Serena, Coquimbo, Online | Alexander Bonilla" },
+      { name: "description", content: "Reserva tu sesión de psicoterapia con Alexander Bonilla. Atención presencial en La Serena y online en todo Chile. Particular, Fonasa e Isapre. Pago seguro por Flow o transferencia." },
+      { property: "og:title", content: "Agendar sesión — Psicólogo Alexander Bonilla" },
+      { property: "og:description", content: "Reserva tu sesión presencial u online. Particular, Fonasa, Isapre." },
+      { property: "og:url", content: "https://www.psalexanderbonilla.cl/agendarsesion" },
     ],
-    links: [{ rel: "canonical", href: "/agendarsesion" }],
+    links: [{ rel: "canonical", href: "https://www.psalexanderbonilla.cl/agendarsesion" }],
   }),
   component: AgendarSesion,
 });
