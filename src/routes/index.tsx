@@ -67,15 +67,32 @@ function AboutCarousel() {
 }
 
 
+const SITE_URL = "https://www.psalexanderbonilla.cl";
+const HOME_TITLE = "Psicólogo en La Serena, Coquimbo y Ovalle — Fonasa, Isapre y Particular | Alexander Bonilla";
+const HOME_DESC = "Psicólogo clínico en La Serena (Región de Coquimbo). Terapia para ansiedad, depresión, autoestima, duelo, neurodivergencias (TEA/TDAH), niños, adolescentes, adultos jóvenes, parejas y familias. Atención particular y convenios Fonasa/Isapre. Sesiones online en todo Chile y presencial en Av. Balmaceda 2195.";
+
+const FAQ_JSONLD = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    { "@type": "Question", name: "¿Atiendes por Fonasa o Isapre?", acceptedAnswer: { "@type": "Answer", text: "Sí. Trabajo con atención particular y también con convenios Fonasa e Isapre según disponibilidad. Escríbeme para confirmar tu modalidad." } },
+    { "@type": "Question", name: "¿Atiendes en Coquimbo, Ovalle o Vicuña?", acceptedAnswer: { "@type": "Answer", text: "La consulta presencial está en La Serena (Av. Balmaceda 2195), y atiendo online a personas de Coquimbo, Ovalle, Vicuña y el resto de Chile." } },
+    { "@type": "Question", name: "¿Qué problemáticas trabajas?", acceptedAnswer: { "@type": "Answer", text: "Ansiedad, depresión, autoestima, regulación emocional, duelo, neurodivergencias (TEA, TDAH), terapia infanto-juvenil, adultez joven, familia, pareja y sexualidad." } },
+    { "@type": "Question", name: "¿Ofreces terapia online?", acceptedAnswer: { "@type": "Answer", text: "Sí, sesiones online por videollamada para toda la Región de Coquimbo y Chile." } },
+  ],
+};
+
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Alexander Bonilla — Psicólogo Clínico | Terapia humana y cercana" },
-      { name: "description", content: "Psicólogo clínico en La Serena. Terapia presencial para ansiedad, autoestima, regulación emocional, neurodivergencias y más. Un espacio seguro y libre de juicios." },
-      { property: "og:title", content: "Alexander Bonilla — Psicólogo Clínico" },
-      { property: "og:description", content: "Un espacio seguro y humano para tu bienestar emocional." },
+      { title: HOME_TITLE },
+      { name: "description", content: HOME_DESC },
+      { property: "og:title", content: HOME_TITLE },
+      { property: "og:description", content: HOME_DESC },
+      { property: "og:url", content: SITE_URL },
     ],
-    links: [{ rel: "canonical", href: "/" }],
+    links: [{ rel: "canonical", href: SITE_URL }],
+    scripts: [{ type: "application/ld+json", children: JSON.stringify(FAQ_JSONLD) }],
   }),
   component: Index,
 });
