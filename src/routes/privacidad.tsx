@@ -82,7 +82,7 @@ function PrivacidadPage() {
           <p className="text-sm leading-relaxed text-muted-foreground">
             El responsable del tratamiento de los datos personales es{" "}
             <strong>Alexander De Jesús Bonilla Espinoza</strong>, psicólogo
-            clínico, RUT 18.631.788-2, con domicilio profesional en Av.
+            clínico, con domicilio profesional en Av.
             Balmaceda 2195, Edificio Portal las Higueras, Oficina 401, La
             Serena, Región de Coquimbo, Chile. Puede contactarse a través del
             correo electrónico{" "}
@@ -107,7 +107,7 @@ function PrivacidadPage() {
           </p>
           <ul className="list-disc pl-5 space-y-1 text-sm text-muted-foreground">
             <li>
-              <strong>De identificación:</strong> nombre, RUT, fecha de
+              <strong>De identificación:</strong> nombre, fecha de
               nacimiento, correo electrónico, teléfono y dirección.
             </li>
             <li>

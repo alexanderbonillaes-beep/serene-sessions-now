@@ -11,7 +11,7 @@ const corsHeaders = {
 };
 
 const INJECTION_RE =
-  /(<script\b|javascript:|onerror\s*=|onload\s*=|<iframe|<\?php|;--|union\s+select|drop\s+table|insert\s+into|update\s+.+\s+set|delete\s+from|\$\{|<%|`\s*\$\{)/i;
+  /(<script\b|<style\b|<link\b|<object\b|<embed\b|<base\b|<meta\b|javascript:|data:text\/html|on\w+\s*=|<iframe|<\?php|;--|union\s+select|drop\s+table|insert\s+into|update\s+.+\s+set|delete\s+from|\$\{|<%|`\s*\$\{)/i;
 
 async function moderateWithAI(text: string): Promise<{ ok: boolean; reason?: string }> {
   const apiKey = Deno.env.get("LOVABLE_API_KEY");
