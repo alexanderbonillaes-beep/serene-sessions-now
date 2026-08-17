@@ -55,7 +55,7 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
 
 const SITE_URL = "https://www.psalexanderbonilla.cl";
 const DEFAULT_TITLE = "Psicólogo en La Serena, Coquimbo y Ovalle | Alexander Bonilla";
-const DEFAULT_DESC = "Psicólogo clínico en La Serena, Coquimbo, Ovalle y Vicuña. Terapia para ansiedad, depresión, autoestima y neurodivergencias. Atención particular, convenios Fonasa e Isapre. Online y presencial.";
+const DEFAULT_DESC = "Psicólogo clínico en La Serena, Coquimbo, Ovalle y Vicuña. Terapia para ansiedad, depresión, autoestima y neurodivergencias. Online y presencial.";
 const OG_IMAGE = "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/a1530940-14cb-48de-b7ca-2172bf747ddf";
 
 const ORG_JSONLD = {
