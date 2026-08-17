@@ -68,8 +68,8 @@ function AboutCarousel() {
 
 
 const SITE_URL = "https://www.psalexanderbonilla.cl";
-const HOME_TITLE = "Psicólogo en La Serena, Coquimbo y Ovalle — Fonasa, Isapre y Particular | Alexander Bonilla";
-const HOME_DESC = "Psicólogo clínico en La Serena (Región de Coquimbo). Terapia para ansiedad, depresión, autoestima, duelo, neurodivergencias (TEA/TDAH), niños, adolescentes, adultos jóvenes, parejas y familias. Atención particular y convenios Fonasa/Isapre. Sesiones online en todo Chile y presencial en Av. Balmaceda 2195.";
+const HOME_TITLE = "Psicólogo en La Serena, Coquimbo y Ovalle | Alexander Bonilla";
+const HOME_DESC = "Psicólogo clínico en La Serena (Región de Coquimbo). Terapia para ansiedad, depresión, autoestima, duelo, neurodivergencias (TEA/TDAH), niños, adolescentes, adultos jóvenes, parejas y familias. Sesiones online en todo Chile y presencial en Av. Balmaceda 2195.";
 
 const FAQ_JSONLD = {
   "@context": "https://schema.org",
