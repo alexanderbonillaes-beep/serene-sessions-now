@@ -108,6 +108,14 @@ function AgendarSesion() {
           data-url="https://calendly.com/alexander-bonillaes/1hr?primary_color=4db6ac&hide_gdpr_banner=1"
           style={{ minWidth: 280 }}
         />
+        <p className="mx-auto max-w-2xl px-4 mt-4 text-xs text-muted-foreground text-center leading-relaxed">
+          Al agendar aceptas el tratamiento de tus datos personales conforme a
+          nuestra{" "}
+          <a href="/privacidad" className="text-primary underline underline-offset-2 hover:opacity-80">
+            política de privacidad
+          </a>{" "}
+          y la Ley N° 21.719. No usamos cookies.
+        </p>
       </section>
 
       <section ref={paymentRef} className="px-4 sm:px-6 pb-16 md:pb-20 scroll-mt-24">

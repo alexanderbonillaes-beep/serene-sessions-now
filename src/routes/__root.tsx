@@ -12,6 +12,7 @@ import appCss from "../styles.css?url";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { FloatingWhatsApp } from "@/components/site/FloatingWhatsApp";
+import { PrivacyBanner } from "@/components/site/PrivacyBanner";
 import { Toaster } from "@/components/ui/sonner";
 
 function NotFoundComponent() {
@@ -162,6 +163,7 @@ function RootComponent() {
         </main>
         <Footer />
         <FloatingWhatsApp />
+        <PrivacyBanner />
         <Toaster />
       </div>
     </QueryClientProvider>
