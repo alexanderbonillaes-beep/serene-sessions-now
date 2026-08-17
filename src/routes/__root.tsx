@@ -163,6 +163,7 @@ function RootComponent() {
         </main>
         <Footer />
         <FloatingWhatsApp />
+        <PrivacyBanner />
         <Toaster />
       </div>
     </QueryClientProvider>
