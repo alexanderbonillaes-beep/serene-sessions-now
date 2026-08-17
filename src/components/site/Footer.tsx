@@ -43,8 +43,14 @@ export function Footer() {
           <p className="text-sm text-muted-foreground">{ADDRESS}</p>
         </div>
       </div>
-      <div className="border-t border-border/60 py-6 text-center text-xs text-muted-foreground">
-        © {new Date().getFullYear()} Alexander Bonilla · Psicólogo Clínico
+      <div className="border-t border-border/60 py-6 flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 text-center text-xs text-muted-foreground px-6">
+        <span>© {new Date().getFullYear()} Alexander Bonilla · Psicólogo Clínico</span>
+        <span className="hidden sm:inline opacity-40">·</span>
+        <Link to="/privacidad" className="hover:text-primary underline-offset-2 hover:underline">
+          Política de Privacidad
+        </Link>
+        <span className="hidden sm:inline opacity-40">·</span>
+        <span>Sin cookies · Ley N° 21.719</span>
       </div>
     </footer>
   );
